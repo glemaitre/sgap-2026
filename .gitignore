@@ -62,5 +62,6 @@ jupyterlite/dist
 
 # Installed agent skills and local agent state
 .agents/
-.pi/
+**/.pi/**
+!**/.pi/settings.json
 .skore/

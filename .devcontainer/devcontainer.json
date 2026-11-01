@@ -28,6 +28,6 @@
   "remoteEnv": {
     "OPENROUTER_API_KEY": "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"
   },
-  "postCreateCommand": "sudo chown vscode .pixi && pixi install && pixi run convert-to-notebooks && cd sessions/agentic-ml && pixi run skore skills install all --agent pi",
+  "postCreateCommand": "bash .devcontainer/prepare-pi.sh && sudo chown vscode .pixi && pixi install && pixi run convert-to-notebooks && cd sessions/agentic-ml && pixi run skore skills install all --agent pi",
   "postStartCommand": "pixi run jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --ServerApp.token= --ServerApp.password= --ServerApp.allow_origin=*"
 }

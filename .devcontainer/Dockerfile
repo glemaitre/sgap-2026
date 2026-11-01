@@ -33,4 +33,5 @@ RUN echo 'eval "$(pixi completion -s bash)"' >> /home/vscode/.bashrc \
     && test -n "$pi_bin" \
     && echo "export PATH=\"$(dirname "$pi_bin"):\$PATH\"" >> "$HOME/.bashrc" \
     && "$pi_bin" install npm:@probabl/pi-skore \
-    && "$pi_bin" --version
+    && "$pi_bin" --version \
+    && node -e 'const fs=require("fs"),os=require("os"),path=require("path"); const agent=path.join(os.homedir(),".pi","agent"); fs.mkdirSync(agent,{recursive:true}); const authPath=path.join(agent,"auth.json"); if (fs.existsSync(authPath)) { const data=JSON.parse(fs.readFileSync(authPath,"utf8")); delete data.openrouter; if (Object.keys(data).length===0) fs.rmSync(authPath); else fs.writeFileSync(authPath, JSON.stringify(data,null,2)+"\n"); }'

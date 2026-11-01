@@ -14,7 +14,7 @@ A Codespace already has Pi, the `pi-skore` extension, skore, and the skills. Fro
 pi
 ```
 
-The lecture OpenRouter key is in `.env` and is already exported in the Codespace.
+The lecture OpenRouter key is in `.env` and is already exported in the Codespace. Container setup removes any saved OpenRouter login, so Pi uses that key, trusts this repository, and starts on DeepSeek V4.1 Flash 1017.
 
 ## Install the skills yourself
 
@@ -49,7 +49,7 @@ skore skills install all --agent pi
 pi
 ```
 
-`source .env` loads the lecture OpenRouter key. Pi reads `OPENROUTER_API_KEY` and does not ask you to log in. Run `/model` if you want a different OpenRouter model.
+`source .env` loads the lecture OpenRouter key. Pi reads `OPENROUTER_API_KEY` and does not ask you to log in. It starts on DeepSeek V4.1 Flash 1017. The first launch asks you to trust this folder before it loads `.pi/settings.json`.
 
 ### Another harness
 
