@@ -16,7 +16,6 @@ df
 
 # %%
 feature_names = [
-    "Region",
     "Island",
     "Culmen Depth (mm)",
     "Flipper Length (mm)",

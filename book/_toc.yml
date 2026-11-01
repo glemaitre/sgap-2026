@@ -9,5 +9,5 @@ parts:
       - file: content/notebooks/01_evaluation
       - file: content/notebooks/02_heterogeneous_data
       - file: content/notebooks/03_cross_validation_strategies
-      - file: content/notebooks/04_notes_on_classification_metrics
-      - file: content/notebooks/05_nested_cross_validation
+      - file: content/notebooks/04_nested_cross_validation
+      - file: content/notebooks/05_notes_on_classification_metrics

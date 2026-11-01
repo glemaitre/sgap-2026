@@ -20,11 +20,11 @@ df
 #
 # We see that we have some strings and numbers in this dataset. Let's set up a
 # classification problem: we want to predict the species of the penguins given some
-# numerical and categorical features.
+# numerical and categorical features. `Region` is the same value for every penguin, so
+# we leave it out.
 
 # %%
 feature_names = [
-    "Region",
     "Island",
     "Culmen Length (mm)",
     "Culmen Depth (mm)",

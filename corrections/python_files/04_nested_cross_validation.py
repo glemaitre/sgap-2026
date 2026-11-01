@@ -5,8 +5,7 @@
 # In this notebook, we will illustrate how to perform hyperparameter tuning
 # using nested cross-validation.
 #
-# We start by defining the predictive model from the previous notebook with
-# `tabular_pipeline`.
+# We start from the `tabular_pipeline` introduced in the heterogeneous-data notebook.
 
 # %%
 import pandas as pd
@@ -16,7 +15,6 @@ df
 
 # %%
 feature_names = [
-    "Region",
     "Island",
     "Culmen Depth (mm)",
     "Flipper Length (mm)",

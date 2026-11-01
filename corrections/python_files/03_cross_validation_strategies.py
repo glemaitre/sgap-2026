@@ -2,217 +2,71 @@
 #
 # # Cross-validation strategies
 #
-# The previous notebooks introduced how to evaluate a model and how to create a
-# specific preprocessing pipeline depending on the last model.
+# The previous notebooks introduced how to evaluate a model and how to build a
+# preprocessing pipeline that depends on that model.
 #
-# In this notebook, we will look more closely at some details of the cross-validation
-# strategies and at some of the pitfalls that we can encounter.
-#
-# Let's take the iris dataset and evaluate a logistic regression model.
-
-# %%
-from sklearn.datasets import load_iris
-
-df, target = load_iris(as_frame=True, return_X_y=True)
-
-# %%
-df
-
-# %%
-target
-
-# %%
-from sklearn.linear_model import LogisticRegression
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler
-
-logistic_regression = make_pipeline(StandardScaler(), LogisticRegression())
-logistic_regression
-
-# %%
-import pandas as pd
-from sklearn.model_selection import KFold, cross_validate
-
-cv = KFold(n_splits=3)
-cv_results = cross_validate(logistic_regression, df, target, cv=cv, return_train_score=True)
-cv_results = pd.DataFrame(cv_results)
-cv_results[["train_score", "test_score"]]
+# A cross-validation score is useful when the split emulates what will happen in
+# production.
 
 # %% [markdown]
 #
-# We observe that the training score is always zero, which is really surprising. We can
-# check the target to understand why.
-
-# %%
-ax = target.plot()
-_ = ax.set(
-    xlabel="Sample index",
-    ylabel="Target value",
-    title="Iris dataset target values",
-)
+# ## The split has to match production
+#
+# The training rows and the test rows have to stand in for the data we will meet later.
+# The rule that separates them has to be the rule of production. The figures in
+# [Visualizing cross-validation behavior](https://scikit-learn.org/stable/auto_examples/model_selection/plot_cv_indices.html)
+# show which rows each splitter puts in the training set and in the test set.
+#
+# ### Time series
+#
+# In production we predict a later period from earlier data. A shuffled split puts
+# future rows into the training set. `TimeSeriesSplit` keeps each test block after its
+# training block.
+#
+# ### Groups
+#
+# In production we meet a new writer, patient, or site. A shuffled split puts other rows
+# from the same group on both sides of the split. `GroupKFold` keeps each group entirely
+# in the training set or entirely in the test set.
+#
+# ### Stratification
+#
+# Forcing the same class mix into every fold reduces the variance of the scores. That
+# reduction is a bias: production does not hand over a batch with the same mix.
+# Stratification is therefore usually not the requirement.
 
 # %% [markdown]
 #
-# We observe that the data is ordered by target. This is a problem because the
-# `KFold` object is not shuffling the data before splitting it. Therefore, we always get a
-# test set that does not contain a class seen during `fit`.
-
-# %%
-for cv_fold_idx, (train_indices, test_indices) in enumerate(cv.split(df, target)):
-    print(f"Fold {cv_fold_idx}:\n")
-    print(f"Class counts on the train set:\n" f"{target.iloc[train_indices].value_counts()}")
-    print(f"Class counts on the test set:\n" f"{target.iloc[test_indices].value_counts()}")
-    print()
-
-# %% [markdown]
+# ## Digits from several writers
 #
-# We can use a `StratifiedKFold` object to ensure that the class distribution is
-# preserved in each fold. A side effect will be that all classes will be present in the
-# training set and testing set.
-
-# %%
-from sklearn.model_selection import StratifiedKFold
-
-cv = StratifiedKFold(n_splits=3)
-cv_results = cross_validate(logistic_regression, df, target, cv=cv, return_train_score=True)
-cv_results = pd.DataFrame(cv_results)
-cv_results[["train_score", "test_score"]]
-
-# %%
-for cv_fold_idx, (train_indices, test_indices) in enumerate(cv.split(df, target)):
-    print(f"Fold {cv_fold_idx}:\n")
-    print(f"Class counts on the train set:\n" f"{target.iloc[train_indices].value_counts()}")
-    print(f"Class counts on the test set:\n" f"{target.iloc[test_indices].value_counts()}")
-    print()
-
-# %% [markdown]
-#
-# This is particularly useful when we have imbalanced classes. Let's check the class
-# distribution of the breast cancer dataset.
-
-# %%
-from sklearn.datasets import load_breast_cancer
-
-df, target = load_breast_cancer(as_frame=True, return_X_y=True)
-
-# %%
-target.value_counts(normalize=True)
-
-# %% [markdown]
-#
-# Here, we see that the proportion of the two classes is not equal. We can check the
-# class distribution in each fold using a `KFold` object.
-
-# %%
-cv = KFold(n_splits=3, shuffle=True, random_state=0)
-for cv_fold_idx, (train_indices, test_indices) in enumerate(cv.split(df, target)):
-    print(f"Fold {cv_fold_idx}:\n")
-    print(
-        "Class counts on the train set:\n"
-        f"{target.iloc[train_indices].value_counts(normalize=True)}\n"
-    )
-    print(f"Class counts on the test set:\n" f"{target.iloc[test_indices].value_counts(True)}")
-    print()
-
-# %% [markdown]
-#
-# We observe that the class distribution is not preserved in each fold. We can use a
-# `StratifiedKFold` object to ensure that the class distribution is preserved in each
-# fold.
-
-# %%
-cv = StratifiedKFold(n_splits=3)
-for cv_fold_idx, (train_indices, test_indices) in enumerate(cv.split(df, target)):
-    print(f"Fold {cv_fold_idx}:\n")
-    print(
-        "Class counts on the train set:\n"
-        f"{target.iloc[train_indices].value_counts(normalize=True)}\n"
-    )
-    print(f"Class counts on the test set:\n" f"{target.iloc[test_indices].value_counts(True)}")
-    print()
-
-# %% [markdown]
-#
-# Now, let's check the documentation of
-# [cross_validate](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_validate.html)
-# to see if this
-# function already provides a way to stratify the data.
-
-# %%
-help(cross_validate)
-
-# %% [markdown]
-#
-# Now, we will look at the notion of `groups` in cross-validation. We will use the
-# digits dataset and group the samples by writer.
+# The digits dataset contains handwritten digits from several writers. Three pixel
+# columns never vary, so we drop them. We then fit a logistic regression on the scaled
+# pixels.
 
 # %%
 from sklearn.datasets import load_digits
 
-df, target = load_digits(return_X_y=True)
-
-# %% [markdown]
-#
-# We create a simple model that is a logistic regression model with a scaling of the
-# data.
+X, y = load_digits(return_X_y=True)
+X = X[:, X.std(axis=0) > 0]
 
 # %%
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import MinMaxScaler
 
 logistic_regression = make_pipeline(MinMaxScaler(), LogisticRegression())
 
 # %% [markdown]
 #
-# Let's start by evaluating the model using a `KFold` object, once without shuffling and
-# once with shuffling.
-
-# %%
-cv = KFold(n_splits=13)
-cv_results = cross_validate(logistic_regression, df, target, cv=cv)
-print(
-    f"Mean test score: {cv_results['test_score'].mean():.3f} +/- "
-    f"{cv_results['test_score'].std():.3f}"
-)
-
-# %%
-cv = KFold(n_splits=13, shuffle=True, random_state=0)
-cv_results = cross_validate(logistic_regression, df, target, cv=cv)
-print(
-    f"Mean test score: {cv_results['test_score'].mean():.3f} +/- "
-    f"{cv_results['test_score'].std():.3f}"
-)
-
-# %% [markdown]
-#
-# Surprisingly, the mean test score increases when shuffling the data. Let's check
-# if this is due to the random seed.
-
-# %%
-for seed in range(10):
-    cv = KFold(n_splits=13, shuffle=True, random_state=seed)
-    cv_results = cross_validate(logistic_regression, df, target, cv=cv)
-    print(
-        f"Mean test score: {cv_results['test_score'].mean():.3f} +/- "
-        f"{cv_results['test_score'].std():.3f}"
-    )
-
-# %% [markdown]
-#
-# Apparently not. The reason is that the samples are grouped by writer. By shuffling,
-# we are mixing the samples from different writers. Therefore, we are fitting a model
-# on writers that also appear in the test set. However, if we want to have a model that
-# generalizes well to new writers, we should not mix the samples from the same writer
-# between the training and testing sets.
-#
-# Here, we provide a `groups` array that gives the writer ID for each sample.
+# The samples are ordered by writer. This `groups` array gives the writer of each
+# sample.
 
 # %%
 from itertools import count
 
 import numpy as np
 
-# Define the lower and upper bounds of sample indices
-# for each writer.
+# Define the lower and upper bounds of sample indices for each writer.
 writer_boundaries = [
     0,
     130,
@@ -230,12 +84,12 @@ writer_boundaries = [
     1667,
     1797,
 ]
-groups = np.zeros_like(target)
+groups = np.zeros_like(y)
 lower_bounds = writer_boundaries[:-1]
 upper_bounds = writer_boundaries[1:]
 
-for group_id, lb, up in zip(count(), lower_bounds, upper_bounds):
-    groups[lb:up] = group_id
+for group_id, lower, upper in zip(count(), lower_bounds, upper_bounds):
+    groups[lower:upper] = group_id
 
 # %%
 import matplotlib.pyplot as plt
@@ -249,20 +103,28 @@ _ = plt.title("Underlying writer groups present in the target")
 
 # %% [markdown]
 #
-# We can use this information to properly evaluate our model. We need to use the
-# `GroupKFold` object and pass the `groups` parameter to the `cross_validate` function.
+# `cross_validate` forwards `groups` to the splitter. With a `GroupKFold`, each writer
+# stays entirely in the training rows or entirely in the test rows. A `KFold` and a
+# `StratifiedKFold` do not use these groups.
 
 # %%
-from sklearn.model_selection import GroupKFold
+from sklearn.model_selection import GroupKFold, KFold, StratifiedKFold, cross_validate
 
-cv = GroupKFold(n_splits=13)
-cv_results = cross_validate(logistic_regression, df, target, groups=groups, cv=cv)
-print(
-    f"Mean test score: {cv_results['test_score'].mean():.3f} +/- "
-    f"{cv_results['test_score'].std():.3f}"
-)
+splitters = {
+    "GroupKFold": GroupKFold(n_splits=13),
+    "KFold": KFold(n_splits=13),
+    "StratifiedKFold": StratifiedKFold(n_splits=13),
+}
+for name, cv in splitters.items():
+    cv_groups = groups if name == "GroupKFold" else None
+    cv_results = cross_validate(logistic_regression, X, y, groups=cv_groups, cv=cv)
+    print(
+        f"{name}: {cv_results['test_score'].mean():.3f} +/- "
+        f"{cv_results['test_score'].std():.3f}"
+    )
 
 # %% [markdown]
 #
-# We observe that the mean test score is even lower but certainly closer to the true
-# performance of the model.
+# The `KFold` and the `StratifiedKFold` scores sit higher, because samples from the same
+# writer appear on both sides of those splits. The `GroupKFold` score is the one we
+# would expect on a new writer.
