@@ -15,6 +15,8 @@ df
 
 # %% [markdown]
 #
+# ## Introduction to the core concepts
+#
 # In this dataset, we observe that we have two variables: the flipper length and the
 # body mass of the penguins. The objective here is to create a predictive model allowing
 # us to predict the body mass of a penguin based on its flipper length.
@@ -70,10 +72,9 @@ linear_regression.fit(X, y)
 
 # %% [markdown]
 #
-# In scikit-learn, the method `fit` is
-# used to train a model. In this case, it allows us to find the best parameters of the
-# linear regression model to fit the data. These parameters are stored in the attributes
-# `coef_` and `intercept_` of the instance.
+# In scikit-learn, the method `fit` is used to train a model. In this case, it allows
+# us to find the best parameters of the linear regression model to fit the data. These
+# parameters are stored in the attributes `coef_` and `intercept_` of the instance.
 
 # %%
 linear_regression.coef_, linear_regression.intercept_
@@ -92,8 +93,8 @@ y_pred = linear_regression.predict(X_to_infer)
 
 # %% [markdown]
 #
-# The method `predict` allows us to get
-# the prediction of the model on new data. Now, we plot the obtained values.
+# The method `predict` allows us to get the prediction of the model on new data. Now,
+# we plot the obtained values.
 
 # %%
 ax = df.plot.scatter(x="Flipper Length (mm)", y="Body Mass (g)")
@@ -104,8 +105,8 @@ _ = ax.legend()
 # %% [markdown]
 #
 # Fitting chooses the coefficient and the intercept that minimize a loss. For
-# `LinearRegression`, that loss is the residual sum of
-# squares between the observed body mass and the prediction:
+# `LinearRegression`, that loss is the residual sum of squares between the observed
+# body mass and the prediction:
 #
 # $$
 # \text{RSS}(\text{coef}, \text{intercept}) =
@@ -233,11 +234,17 @@ print(f"The median absolute error of QuantileRegressor is: {error:.2f}")
 # match the quantity the problem asks for. The linear model estimates the conditional
 # mean. The quantile model, with `quantile=0.5`, estimates the conditional median.
 #
-# Up to now, we have evaluated the models on the same dataset used to fit them. This
-# does not tell us how well they generalize to new data.
+# ## Evaluate on unseen data
+#
+# The previous section introduced the core concepts: the linear prediction, the loss it
+# minimizes, and the quantity that loss estimates. The errors computed so far use the
+# same penguins that were used to fit the models. In production, the model is applied
+# to penguins it has never seen. The quantity we want is the error on such a completely
+# unseen dataset.
 #
 # We set aside a testing set with `train_test_split`. The training set is used to
-# create the model, and the testing set is used to evaluate it on unseen data.
+# create the model. The testing set is left out of `fit`, so the error computed on it
+# stands in for the error we would observe in that future production setting.
 
 # %%
 from sklearn.model_selection import train_test_split
@@ -246,8 +253,10 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
 
 # %% [markdown]
 #
-# We fit both models and compare them with the median absolute error on the testing
-# set.
+# We fit the linear model and the median model on the training set only. The median
+# model is a `QuantileRegressor` with `quantile=0.5` and `alpha=0`, as in the exercise.
+# We compare them with the median absolute error on the testing set, our stand-in for
+# future data.
 
 # %%
 linear_regression.fit(X_train, y_train)
@@ -264,10 +273,10 @@ print(
 
 # %% [markdown]
 #
-# Each printed number is a single estimate of the generalization error. It has no
-# variance. A lower value on this split is not evidence that the improvement is
-# significant: we cannot tell whether the difference would show up again on another
-# split.
+# Each printed number is a single estimate of the generalization error, the error on
+# data held out to mimic future production data. It has no variance. A lower value on
+# this split is not evidence that the improvement is significant: we cannot tell
+# whether the difference would show up again on another split.
 #
 # We repeat the split of the linear model for several seeds and plot the distribution
 # of the test error. We do the same for the quantile model, on the same seeds.
@@ -291,13 +300,19 @@ _ = ax.set_title("Median absolute error across train-test splits")
 # The two distributions overlap. A single split can land where one model looks better,
 # which is why that one estimate was not enough to claim a significant improvement.
 #
-# Doing this repetition by hand is tedious. `cross_validate`,
-# with a `KFold` splitter, repeats the split for us
-# and stores the results in a Python dictionary.
+# ### Cross-validation
 #
-# We do not pass a scorer. For a regressor, the default score is the R² coefficient:
-# a higher score is better. This score is not the median absolute error from the
-# previous cells.
+# Cross-validation repeats the train-test split several times. Each repetition fits the
+# model on one part of the data and evaluates it on the part left out, the same idea as
+# the testing set above.
+#
+# Doing this repetition by hand is tedious. `cross_validate`, with a `KFold` splitter,
+# repeats the split for us and stores the results in a Python dictionary.
+#
+# We score each split with the mean absolute error. Scikit-learn scores are
+# higher-is-better, so this error is passed as `neg_mean_absolute_error`. The stored
+# values are negative: a value closer to zero is a smaller error. This is the mean
+# absolute error, not the median absolute error from the previous cells.
 
 # %%
 from sklearn.model_selection import KFold, cross_validate
@@ -308,6 +323,7 @@ cv_results = cross_validate(
     X,
     y,
     cv=cv,
+    scoring="neg_mean_absolute_error",
     return_train_score=True,
 )
 cv_results = pd.DataFrame(cv_results)
@@ -318,9 +334,12 @@ cv_results[["train_score", "test_score"]].describe()
 
 # %% [markdown]
 #
-# `skore.evaluate` runs the same kind of evaluation and reports the metrics directly.
-# The mean absolute error is available under the name `mean_absolute_error`, with no
-# `neg_` prefix.
+# ### A structured report with skore
+#
+# `evaluate` runs the same cross-validation and stores it in a structured report.
+# For a regressor, this report already includes the mean absolute error. It is
+# reported as a positive error under the name `mae`, with no `neg_` prefix. We
+# summarize the metrics directly.
 
 # %%
 from skore import evaluate
@@ -329,14 +348,21 @@ report = evaluate(linear_regression, X, y, splitter=cv)
 report.metrics.summarize().frame()
 
 # %%
-report.metrics.add("mean_absolute_error")
-report.metrics.get("mean_absolute_error")
+report
+
+# %% [markdown]
+#
+# The report stores more than the scalar metrics. The prediction-error display compares
+# the predicted body mass with the observed one.
+
+# %%
+report.metrics.prediction_error().plot(kind="actual_vs_predicted")
 
 # %% [markdown]
 #
 # We can pass both models to the same function. The summary then gives the mean and
-# the standard deviation of each metric across the splits. This is the comparison that
-# a single split could not support.
+# the standard deviation of each metric across the splits, including the mean absolute
+# error. This is the comparison that a single split could not support.
 
 # %%
 comparison = evaluate(
@@ -345,4 +371,14 @@ comparison = evaluate(
     y,
     splitter=cv,
 )
-comparison.metrics.summarize().frame()
+comparison
+
+# %% [markdown]
+#
+# ## Conclusion
+#
+# We started from a linear prediction and the loss it minimizes. That loss decides which
+# quantity the model estimates, so the metric we report has to match that quantity. An
+# error on the data used to fit the model is not the error we would see in production. A
+# testing set stands in for unseen data, and cross-validation repeats that split so the
+# estimate has a mean and a spread. `evaluate` gathers this comparison in one report.
