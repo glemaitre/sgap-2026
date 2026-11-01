@@ -4,7 +4,7 @@
 format: jb-book
 root: intro
 parts:
-  - caption: Model evaluation
+  - caption: Hands-on building predictive model
     chapters:
       - file: content/notebooks/01_evaluation
       - file: content/notebooks/02_heterogeneous_data
