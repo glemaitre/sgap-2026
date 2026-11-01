@@ -1,0 +1,15 @@
+name: sgap-2026
+channels:
+  - conda-forge
+dependencies:
+  - python=3.14.7
+  - jupyterlab>=4.4.3,<5
+  - notebook>=7.4.3,<8
+  - ipykernel
+  - jupytext>=1.17.2,<2
+  - scikit-learn>=1.9.1,<1.10
+  - skrub>=0.11.0,<0.12
+  - pandas
+  - matplotlib
+  - numpy
+  - scipy

@@ -1,0 +1,45 @@
+[tool.ruff]
+line-length = 100
+target-version = "py314"
+
+# book/content and jupyterlite/content are symlinks to content/. Generated
+# notebooks are produced by utils/convert_to_notebooks.py.
+extend-exclude = [
+    ".pixi",
+    "book/content",
+    "book/_build",
+    "jupyterlite/content",
+    "jupyterlite/dist",
+    "content/notebooks",
+    "corrections/notebooks",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = [
+    # Imports are not at the top of jupytext scripts since each `# %%` cell is
+    # a standalone chunk of a notebook.
+    "E402",
+    # Line length is enforced by the formatter.
+    "E501",
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Tutorial scripts keep imports and names that are only used when the reader
+# uncomments cells or fills in an exercise.
+"content/python_files/*.py" = ["F401", "F811", "F821"]
+"corrections/python_files/*.py" = ["F401", "F811", "F821"]
+
+[tool.black]
+line-length = 100
+target-version = ["py314"]
+extend-exclude = '''
+/(
+  content/notebooks
+  | corrections/notebooks
+  | book/content
+  | book/_build
+  | jupyterlite/content
+  | \\.pixi
+)/
+'''
