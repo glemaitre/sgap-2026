@@ -700,7 +700,7 @@ notebook.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2654/4149670560.py:13: Pandas4Warning: For backward compatibility, 'str' dtypes are included by select_dtypes when 'object' dtype is specified. This behavior is deprecated and will be removed in a future version. Explicitly pass 'str' to `include` to select them, or to `exclude` to remove them and silence this warning.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2684/4149670560.py:13: Pandas4Warning: For backward compatibility, 'str' dtypes are included by select_dtypes when 'object' dtype is specified. This behavior is deprecated and will be removed in a future version. Explicitly pass 'str' to `include` to select them, or to `exclude` to remove them and silence this warning.
 See https://pandas.pydata.org/docs/dev/user_guide/migration.html#string-migration-select-dtypes for details on how to write code that works with pandas 2 and 3.
   categorical_columns = X.select_dtypes(include="object").columns
 </pre></div>
@@ -730,7 +730,7 @@ only two classes.</p>
 </div>
 </div>
 </div>
-<p>In the previous notebook, we used the <code class="docutils literal notranslate"><span class="pre">cross_validate</span></code> function to evaluate the
+<p>In the previous notebook, we used the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_validate.html#sklearn.model_selection.cross_validate" title="(in scikit-learn v1.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">cross_validate()</span></code></a> function to evaluate the
 performance of the model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -818,7 +818,7 @@ Name: proportion, dtype: float64
 accuracy of around 0.7. Therefore, when interpreting the accuracy obtained from the
 cross-validation, we should keep this in mind.</p>
 <p>There are also other metrics that we could use to evaluate the performance of
-a classifier. To check these metrics, we can check the <code class="docutils literal notranslate"><span class="pre">classification_report</span></code>
+a classifier. To check these metrics, we can check the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html#sklearn.metrics.classification_report" title="(in scikit-learn v1.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">classification_report()</span></code></a>
 function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -865,11 +865,11 @@ the following confusion matrix:</p>
 <img alt="../../_images/e45f4db7f859c550791c80d63a3af31e7fcdc81a1ae5f60c813b0b4b1e49368d.png" src="../../_images/e45f4db7f859c550791c80d63a3af31e7fcdc81a1ae5f60c813b0b4b1e49368d.png" />
 </div>
 </div>
-<p>An important point to notice is that we used the method <code class="docutils literal notranslate"><span class="pre">predict</span></code> to compute these
+<p>An important point to notice is that we used the method <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html#sklearn.ensemble.HistGradientBoostingClassifier.predict" title="(in scikit-learn v1.9)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">predict()</span></code></a> to compute these
 metrics. However, when dealing with classification, we could use the probabilistic
 properties of our classifier. Here, we will illustrate the probability outputs
 provided by the classifier and how those are transformed into a class.</p>
-<p>The method <code class="docutils literal notranslate"><span class="pre">predict_proba</span></code> provides the probabilities of each class.</p>
+<p>The method <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html#sklearn.ensemble.HistGradientBoostingClassifier.predict_proba" title="(in scikit-learn v1.9)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">predict_proba()</span></code></a> provides the probabilities of each class.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">hist_gradient_boosting</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
@@ -933,7 +933,7 @@ provided by the classifier and how those are transformed into a class.</p>
 <section id="exercise">
 <h3>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
 <p>Try to find the relationship to go from the probabilities to the classes, or
-in other words to go from the output of <code class="docutils literal notranslate"><span class="pre">predict_proba</span></code> to the output of <code class="docutils literal notranslate"><span class="pre">predict</span></code>.</p>
+in other words to go from the output of <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html#sklearn.ensemble.HistGradientBoostingClassifier.predict_proba" title="(in scikit-learn v1.9)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">predict_proba()</span></code></a> to the output of <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html#sklearn.ensemble.HistGradientBoostingClassifier.predict" title="(in scikit-learn v1.9)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">predict()</span></code></a>.</p>
 <p>So it means that the threshold of 0.5 is completely arbitrary. We could change this
 threshold and compute the confusion matrix and subsequent metrics. It will therefore
 create a curve.</p>
@@ -986,7 +986,7 @@ Let’s start by looking at the precision-recall curve.</p>
 </div>
 </div>
 <p>But we could try any other threshold and observe that we are moving on this curve.
-We use the <code class="docutils literal notranslate"><span class="pre">FixedThresholdClassifier</span></code> by setting the threshold to 0.1.</p>
+We use the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.FixedThresholdClassifier.html#sklearn.model_selection.FixedThresholdClassifier" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">FixedThresholdClassifier</span></code></a> by setting the threshold to 0.1.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">FixedThresholdClassifier</span>
@@ -1018,7 +1018,7 @@ the discriminative power of a classifier, or in other words the ranking of the
 predictions.</p>
 <p>However, we don’t evaluate whether the probability estimates of the classifier are
 precise, also known as well calibrated. We can check the calibration of a classifier
-using the <code class="docutils literal notranslate"><span class="pre">CalibrationDisplay</span></code>. This is also known as a reliability diagram.</p>
+using the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.calibration.CalibrationDisplay.html#sklearn.calibration.CalibrationDisplay" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">CalibrationDisplay</span></code></a>. This is also known as a reliability diagram.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.calibration</span><span class="w"> </span><span class="kn">import</span> <span class="n">CalibrationDisplay</span>
@@ -4026,16 +4026,16 @@ Brier score of the LogisticRegression: 0.18
 </div>
 </div>
 <p>We observed that the log loss and the Brier score are lower for the
-<code class="docutils literal notranslate"><span class="pre">HistGradientBoostingClassifier</span></code> than for the <code class="docutils literal notranslate"><span class="pre">LogisticRegression</span></code>.</p>
+<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html#sklearn.ensemble.HistGradientBoostingClassifier" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">HistGradientBoostingClassifier</span></code></a> than for the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticRegression</span></code></a>.</p>
 </section>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="bonus-section">
 <h1>Bonus section<a class="headerlink" href="#bonus-section" title="Link to this heading">#</a></h1>
 <p>We will do this part if we have time. In the previous section, we saw that the
-<code class="docutils literal notranslate"><span class="pre">FixedThresholdClassifier</span></code> is a way to change the threshold of the classifier.
+<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.FixedThresholdClassifier.html#sklearn.model_selection.FixedThresholdClassifier" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">FixedThresholdClassifier</span></code></a> is a way to change the threshold of the classifier.
 However, we might want to find the best threshold that maximizes a metric.</p>
-<p>This is the job of the <code class="docutils literal notranslate"><span class="pre">TunedThresholdClassifierCV</span></code>.</p>
+<p>This is the job of the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TunedThresholdClassifierCV.html#sklearn.model_selection.TunedThresholdClassifierCV" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TunedThresholdClassifierCV</span></code></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span> <span class="o">=</span> <span class="n">PrecisionRecallDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span><span class="n">hist_gradient_boosting</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
