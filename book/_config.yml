@@ -31,16 +31,3 @@ sphinx:
   config:
     html_extra_path:
       - ../slides-intro.pdf
-    intersphinx_mapping:
-      sklearn:
-        - https://scikit-learn.org/stable/
-        - null
-      skrub:
-        - https://skrub-data.org/stable/
-        - null
-      skore:
-        - https://docs.skore.probabl.ai/stable/
-        - null
-      pandas:
-        - https://pandas.pydata.org/docs/
-        - null

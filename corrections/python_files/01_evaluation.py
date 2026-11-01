@@ -70,7 +70,7 @@ linear_regression.fit(X, y)
 
 # %% [markdown]
 #
-# In scikit-learn, the method {py:meth}`~sklearn.linear_model.LinearRegression.fit` is
+# In scikit-learn, the method `fit` is
 # used to train a model. In this case, it allows us to find the best parameters of the
 # linear regression model to fit the data. These parameters are stored in the attributes
 # `coef_` and `intercept_` of the instance.
@@ -92,7 +92,7 @@ y_pred = linear_regression.predict(X_to_infer)
 
 # %% [markdown]
 #
-# The method {py:meth}`~sklearn.linear_model.LinearRegression.predict` allows us to get
+# The method `predict` allows us to get
 # the prediction of the model on new data. Now, we plot the obtained values.
 
 # %%
@@ -104,7 +104,7 @@ _ = ax.legend()
 # %% [markdown]
 #
 # Fitting chooses the coefficient and the intercept that minimize a loss. For
-# {py:class}`~sklearn.linear_model.LinearRegression`, that loss is the residual sum of
+# `LinearRegression`, that loss is the residual sum of
 # squares between the observed body mass and the prediction:
 #
 # $$
@@ -119,7 +119,8 @@ _ = ax.legend()
 # squares](https://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares).
 # The prediction is an estimate of the conditional mean of the body mass.
 #
-# ```{note}
+# ### Gradient descent
+#
 # The same loss can be minimized by gradient descent. The gradient is the pair of
 # partial derivatives of the residual sum of squares with respect to the coefficient
 # and the intercept:
@@ -153,8 +154,7 @@ _ = ax.legend()
 #
 # With a small enough learning rate, each step reduces the loss. This loss is a convex
 # quadratic, so the updates then reach the ordinary least-squares solution.
-# {py:class}`~sklearn.linear_model.LinearRegression` computes that solution directly.
-# ```
+# `LinearRegression` computes that solution directly.
 #
 # We can compute the mean squared error on the same dataset that we used to train the
 # model.
@@ -167,16 +167,17 @@ print(f"The mean squared error is: {error:.2f}")
 
 # %% [markdown]
 #
-# {py:class}`~sklearn.linear_model.QuantileRegressor` estimates a conditional quantile instead of the conditional mean.
+# `QuantileRegressor` estimates a conditional quantile instead of the conditional mean.
 # The documentation is in the user guide on
 # [quantile regression](https://scikit-learn.org/stable/modules/linear_model.html#quantile-regression)
 # and in the
-# {py:class}`~sklearn.linear_model.QuantileRegressor` docstring.
+# [QuantileRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.QuantileRegressor.html)
+# docstring.
 #
 # The model minimizes the pinball loss. With `quantile=0.5`, the target is the
 # conditional median, and the loss matches the median absolute error. We set `alpha=0`
 # because the default value adds an L1 penalty and would confound the comparison with
-# {py:class}`~sklearn.linear_model.LinearRegression`.
+# `LinearRegression`.
 
 # %%
 from sklearn.linear_model import QuantileRegressor
@@ -212,8 +213,8 @@ print(f"The mean squared error of QuantileRegressor is: {error:.2f}")
 
 # %% [markdown]
 #
-# The {py:class}`~sklearn.linear_model.QuantileRegressor` has a higher mean squared error than the {py:class}`~sklearn.linear_model.LinearRegression`.
-# This is expected: the {py:class}`~sklearn.linear_model.QuantileRegressor` minimizes the median absolute error, not
+# The `QuantileRegressor` has a higher mean squared error than the `LinearRegression`.
+# This is expected: the `QuantileRegressor` minimizes the median absolute error, not
 # the mean squared error. We can compute the median absolute error to compare the two
 # models.
 
@@ -227,15 +228,15 @@ print(f"The median absolute error of QuantileRegressor is: {error:.2f}")
 
 # %% [markdown]
 #
-# In terms of median absolute error, the {py:class}`~sklearn.linear_model.QuantileRegressor` has a lower error than the
-# {py:class}`~sklearn.linear_model.LinearRegression`. The model that wins depends on the metric, and the metric has to
+# In terms of median absolute error, the `QuantileRegressor` has a lower error than the
+# `LinearRegression`. The model that wins depends on the metric, and the metric has to
 # match the quantity the problem asks for. The linear model estimates the conditional
 # mean. The quantile model, with `quantile=0.5`, estimates the conditional median.
 #
 # Up to now, we have evaluated the models on the same dataset used to fit them. This
 # does not tell us how well they generalize to new data.
 #
-# We set aside a testing set with {py:func}`~sklearn.model_selection.train_test_split`. The training set is used to
+# We set aside a testing set with `train_test_split`. The training set is used to
 # create the model, and the testing set is used to evaluate it on unseen data.
 
 # %%
@@ -290,8 +291,8 @@ _ = ax.set_title("Median absolute error across train-test splits")
 # The two distributions overlap. A single split can land where one model looks better,
 # which is why that one estimate was not enough to claim a significant improvement.
 #
-# Doing this repetition by hand is tedious. {py:func}`~sklearn.model_selection.cross_validate`,
-# with a {py:class}`~sklearn.model_selection.KFold` splitter, repeats the split for us
+# Doing this repetition by hand is tedious. `cross_validate`,
+# with a `KFold` splitter, repeats the split for us
 # and stores the results in a Python dictionary.
 #
 # We do not pass a scorer. For a regressor, the default score is the R² coefficient:
@@ -317,7 +318,7 @@ cv_results[["train_score", "test_score"]].describe()
 
 # %% [markdown]
 #
-# {py:func}`skore.evaluate` runs the same kind of evaluation and reports the metrics directly.
+# `skore.evaluate` runs the same kind of evaluation and reports the metrics directly.
 # The mean absolute error is available under the name `mean_absolute_error`, with no
 # `neg_` prefix.
 

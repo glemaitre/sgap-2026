@@ -55,11 +55,9 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
 
 # %% [markdown]
 #
-# ```{admonition} Exercise
-# :class: tip
+# ### Exercise
 #
-# Fit a {py:class}`~sklearn.linear_model.LogisticRegression` model on the training data.
-# ```
+# Fit a `LogisticRegression` model on the training data.
 
 # %%
 from sklearn.linear_model import LogisticRegression
@@ -73,11 +71,9 @@ X_numeric = X.select_dtypes(include="number")
 
 # %% [markdown]
 #
-# ```{admonition} Exercise
-# :class: tip
+# ### Exercise
 #
-# Fit a {py:class}`~sklearn.linear_model.LogisticRegression` model on the numerical data.
-# ```
+# Fit a `LogisticRegression` model on the numerical data.
 
 # %%
 
@@ -85,10 +81,10 @@ X_numeric = X.select_dtypes(include="number")
 #
 # Does it work?
 #
-# A scikit-learn {py:class}`~sklearn.pipeline.Pipeline`, created with
-# {py:func}`~sklearn.pipeline.make_pipeline`, chains steps and exposes
-# {py:meth}`~sklearn.pipeline.Pipeline.fit` and {py:meth}`~sklearn.pipeline.Pipeline.predict`, like the
-# final estimator. We use a {py:class}`~sklearn.impute.SimpleImputer` here to impute
+# A scikit-learn `Pipeline`, created with
+# `make_pipeline`, chains steps and exposes
+# `fit` and `predict`, like the
+# final estimator. We use a `SimpleImputer` here to impute
 # missing values before the logistic regression.
 
 # %%
@@ -109,7 +105,7 @@ logistic_regression[-1].n_iter_
 # %% [markdown]
 #
 # Indeed, we reached the maximum number of iterations. We can increase the number of
-# iterations. Let's check which parameters we can set with the {py:meth}`~sklearn.pipeline.Pipeline.get_params` method.
+# iterations. Let's check which parameters we can set with the `get_params` method.
 
 # %%
 logistic_regression.get_params()
@@ -130,7 +126,7 @@ logistic_regression[-1].n_iter_
 #
 # Now, the model converged but it required almost 2,500 iterations. The warning message
 # mentioned that we could try to scale the data. Let's try to scale the data using a
-# {py:class}`~sklearn.preprocessing.StandardScaler`. We can then check if the convergence is faster.
+# `StandardScaler`. We can then check if the convergence is faster.
 
 # %%
 from sklearn.preprocessing import StandardScaler
@@ -143,7 +139,7 @@ logistic_regression[-1].n_iter_
 #
 # It only requires 11 iterations. We can now evaluate the model using cross-validation.
 #
-# The imputer is inside the pipeline, so {py:func}`~sklearn.model_selection.cross_validate` refits it on each training
+# The imputer is inside the pipeline, so `cross_validate` refits it on each training
 # fold. Fitting it on the whole dataset before the split would leak information into
 # the score.
 
@@ -164,17 +160,15 @@ X_categorical
 
 # %% [markdown]
 #
-# ```{admonition} Exercise
-# :class: tip
+# ### Exercise
 #
 # - Think of a way to transform the string categories into numerical data.
 # - Come up with your own transform and evaluate the model using cross-validation.
-# ```
 
 # %% [markdown]
 #
 # We need to find a strategy to "encode" the categorical data into numerical data. The
-# simplest strategy is to use an {py:class}`~sklearn.preprocessing.OrdinalEncoder`.
+# simplest strategy is to use an `OrdinalEncoder`.
 
 # %%
 from sklearn.preprocessing import OrdinalEncoder
@@ -216,7 +210,7 @@ cv_results[["train_score", "test_score"]]
 #
 # We get an error for one of the splits. This is due to the fact that some categories are
 # not present in the test set. We can handle this issue by ignoring the unknown
-# categories. This is given by a parameter in the {py:class}`~sklearn.preprocessing.OneHotEncoder`.
+# categories. This is given by a parameter in the `OneHotEncoder`.
 
 # %%
 logistic_regression.get_params()
@@ -232,9 +226,9 @@ cv_results[["train_score", "test_score"]]
 # %% [markdown]
 #
 # Now, we need to combine both numerical and categorical preprocessing and feed the
-# output to a single linear model. The {py:class}`~sklearn.compose.ColumnTransformer` class is designed for this
+# output to a single linear model. The `ColumnTransformer` class is designed for this
 # purpose: we provide a list of columns so that they are transformed by a specific
-# transformer (or a pipeline of transformers). This {py:class}`~sklearn.compose.ColumnTransformer` can be used as
+# transformer (or a pipeline of transformers). This `ColumnTransformer` can be used as
 # a preprocessing stage of a pipeline containing a linear model as the final stage.
 
 # %%
@@ -265,12 +259,11 @@ cv_results
 # We gave basic preprocessing steps for a linear model. However, there is another group
 # of models that can handle heterogeneous data: tree-based models.
 #
-# ```{admonition} Exercise
-# :class: tip
+# ### Exercise
 #
-# Looking at the documentation:
+# Looking at the documentation of
+# [HistGradientBoostingClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html):
 #
-# - Create a {py:class}`~sklearn.ensemble.HistGradientBoostingClassifier` model on the
+# - Create a `HistGradientBoostingClassifier` model on the
 #   penguins dataset. You are free to create any preprocessing steps you want.
 # - Evaluate the model.
-# ```

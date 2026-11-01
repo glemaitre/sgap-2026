@@ -79,7 +79,7 @@ linear_regression.fit(X, y)
 
 # %% [markdown]
 #
-# In scikit-learn, the method {py:meth}`~sklearn.linear_model.LinearRegression.fit` is
+# In scikit-learn, the method `fit` is
 # used to train a model. In this case, it allows us to find the best parameters of the
 # linear regression model to fit the data. These parameters are stored in the attributes
 # `coef_` and `intercept_` of the instance.
@@ -101,7 +101,7 @@ y_pred = linear_regression.predict(X_to_infer)
 
 # %% [markdown]
 #
-# The method {py:meth}`~sklearn.linear_model.LinearRegression.predict` allows us to get
+# The method `predict` allows us to get
 # the prediction of the model on new data. Now, we plot the obtained values.
 
 # %%
@@ -113,7 +113,7 @@ _ = ax.legend()
 # %% [markdown]
 #
 # Fitting chooses the coefficient and the intercept that minimize a loss. For
-# {py:class}`~sklearn.linear_model.LinearRegression`, that loss is the residual sum of
+# `LinearRegression`, that loss is the residual sum of
 # squares between the observed body mass and the prediction:
 #
 # $$
@@ -128,7 +128,8 @@ _ = ax.legend()
 # squares](https://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares).
 # The prediction is an estimate of the conditional mean of the body mass.
 #
-# ```{note}
+# ### Gradient descent
+#
 # The same loss can be minimized by gradient descent. The gradient is the pair of
 # partial derivatives of the residual sum of squares with respect to the coefficient
 # and the intercept:
@@ -162,8 +163,7 @@ _ = ax.legend()
 #
 # With a small enough learning rate, each step reduces the loss. This loss is a convex
 # quadratic, so the updates then reach the ordinary least-squares solution.
-# {py:class}`~sklearn.linear_model.LinearRegression` computes that solution directly.
-# ```
+# `LinearRegression` computes that solution directly.
 #
 # We can compute the mean squared error on the same dataset that we used to train the
 # model.
@@ -176,19 +176,20 @@ print(f"The mean squared error is: {error:.2f}")
 
 # %% [markdown]
 #
-# ```{admonition} Exercise
-# :class: tip
+# ### Exercise
 #
-# {py:class}`~sklearn.linear_model.LinearRegression` estimates the conditional mean.
-# Another linear model, {py:class}`~sklearn.linear_model.QuantileRegressor`, estimates a
+# `LinearRegression` estimates the conditional mean.
+# Another linear model, `QuantileRegressor`, estimates a
 # conditional quantile. The documentation is in the user guide on
 # [quantile regression](https://scikit-learn.org/stable/modules/linear_model.html#quantile-regression)
-# and in the {py:class}`~sklearn.linear_model.QuantileRegressor` docstring.
+# and in the
+# [QuantileRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.QuantileRegressor.html)
+# docstring.
 #
 # The model minimizes the pinball loss. With `quantile=0.5`, the target is the
 # conditional median, and the loss matches the median absolute error. Set `alpha=0`:
 # the default value adds an L1 penalty and would confound the comparison with
-# {py:class}`~sklearn.linear_model.LinearRegression`.
+# `LinearRegression`.
 #
 # - Fit this median model on the same data.
 # - Plot its predictions on the same figure as the linear regression.
@@ -197,7 +198,6 @@ print(f"The mean squared error is: {error:.2f}")
 #
 # The model we choose depends on the quantity we want to estimate, and that quantity
 # should match the objective of the problem.
-# ```
 
 # %%
 
@@ -206,7 +206,7 @@ print(f"The mean squared error is: {error:.2f}")
 # Up to now, we have evaluated the models on the same dataset used to fit them. This
 # does not tell us how well they generalize to new data.
 #
-# We set aside a testing set with {py:func}`~sklearn.model_selection.train_test_split`. The training set is used to
+# We set aside a testing set with `train_test_split`. The training set is used to
 # create the model, and the testing set is used to evaluate it on unseen data.
 
 # %%
@@ -219,7 +219,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
 # %% [markdown]
 #
 # We fit the linear model and the median model. The median model is a
-# {py:class}`~sklearn.linear_model.QuantileRegressor` with `quantile=0.5` and `alpha=0`, as in the exercise. We compare
+# `QuantileRegressor` with `quantile=0.5` and `alpha=0`, as in the exercise. We compare
 # them with the median absolute error on the testing set.
 
 # %%
@@ -244,25 +244,23 @@ print(
 
 # %% [markdown]
 #
-# ```{admonition} Exercise
-# :class: tip
+# ### Exercise
 #
 # Repeat the train-test evaluation of the linear model for several seeds, and plot the
 # distribution of the test error.
 #
 # - Use a `for` loop over `range`.
-# - At each seed, call {py:func}`~sklearn.model_selection.train_test_split` with
+# - At each seed, call `train_test_split` with
 #   `random_state=seed`, fit the linear model, and append the median absolute error on
 #   the test set to a list.
-# - Plot that list with {py:meth}`pandas.Series.plot.hist`.
-# ```
+# - Plot that list with `pandas.Series.plot.hist`.
 
 # %%
 
 # %% [markdown]
 #
-# Doing this repetition by hand is tedious. {py:func}`~sklearn.model_selection.cross_validate`,
-# with a {py:class}`~sklearn.model_selection.KFold` splitter, repeats the split for us
+# Doing this repetition by hand is tedious. `cross_validate`,
+# with a `KFold` splitter, repeats the split for us
 # and stores the results in a Python dictionary.
 #
 # We do not pass a scorer. For a regressor, the default score is the R² coefficient:
@@ -288,7 +286,7 @@ cv_results[["train_score", "test_score"]].describe()
 
 # %% [markdown]
 #
-# {py:func}`skore.evaluate` runs the same kind of evaluation and reports the metrics directly.
+# `skore.evaluate` runs the same kind of evaluation and reports the metrics directly.
 # The mean absolute error is available under the name `mean_absolute_error`, with no
 # `neg_` prefix.
 

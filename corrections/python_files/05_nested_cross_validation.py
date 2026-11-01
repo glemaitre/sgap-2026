@@ -6,7 +6,7 @@
 # using nested cross-validation.
 #
 # We start by defining the predictive model from the previous notebook with
-# {py:func}`~skrub.tabular_pipeline`.
+# `tabular_pipeline`.
 
 # %%
 import pandas as pd
@@ -60,7 +60,7 @@ logistic_regression.get_params()
 # %% [markdown]
 #
 # We can tune these hyperparameters with
-# {py:class}`~sklearn.model_selection.RandomizedSearchCV`.
+# `RandomizedSearchCV`.
 
 # %%
 from scipy.stats import loguniform
