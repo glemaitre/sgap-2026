@@ -1,11 +1,11 @@
 # SGAP 2026
 
-Course on model evaluation and validation with scikit-learn and skrub, plus an agentic machine learning session.
+Course on model evaluation and validation with scikit-learn and skrub.
 
 ## Browse and run the course
 
 - [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/glemaitre/sgap-2026?quickstart=1)
-  A ready environment with Pi, the skills, and the notebooks.
+  A ready environment with the course packages and the notebooks.
 
 - [![Course website](./book/images/jupyterbook_badge.svg 'Course website')](https://glemaitre.github.io/sgap-2026/)
   Static HTML with precomputed results.
@@ -90,8 +90,8 @@ python utils/convert_to_notebooks.py --source corrections/python_files --output 
 
 ## Agentic machine learning
 
-The hands-on agent session is in [`sessions/agentic-ml`](sessions/agentic-ml). It uses the tephra tables in `data/` and the Pi harness. A Codespace already installs Pi, the `pi-skore` extension, and the skore skills. Instructions for a local harness are in that session's README.
+The hands-on agent exercise is in the separate `sgap-2026-agentic` repository.
 
 ## GitHub Codespaces
 
-Creating a codespace installs Pi, the `pi-skore` extension, the Pixi environment, the notebooks, and the agentic-session skills. It also installs the Python, Jupyter, and Live Preview extensions, so an HTML file has **Show Preview** on right-click. The commands already run are listed in [`sessions/agentic-ml`](sessions/agentic-ml). That README opens in the editor. From `sessions/agentic-ml`, save the shared lecture key with `./configure-key.sh`, then run `pi`.
+Creating a codespace installs the Pixi environment and generates the notebooks. It also installs the Python, Jupyter, and Live Preview extensions, so an HTML file has **Show Preview** on right-click. This README opens in the editor.

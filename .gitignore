@@ -62,9 +62,3 @@ jupyterlite/dist
 
 # Local secrets
 .env
-
-# Installed agent skills and local agent state
-.agents/
-**/.pi/**
-!**/.pi/settings.json
-.skore/

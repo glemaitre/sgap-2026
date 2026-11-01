@@ -8,8 +8,6 @@
     "vscode": {
       "settings": {
         "python.defaultInterpreterPath": "${workspaceFolder}/.pixi/envs/default/bin/python",
-        "python.envFile": "${workspaceFolder}/sessions/agentic-ml/.env",
-        "python.terminal.useEnvFile": true,
         "security.workspace.trust.enabled": false
       },
       "extensions": [
@@ -19,11 +17,11 @@
       ]
     },
     "codespaces": {
-      "openFiles": ["sessions/agentic-ml/README.md"]
+      "openFiles": ["README.md"]
     }
   },
   "mounts": [
     "source=${localWorkspaceFolderBasename}-pixi,target=${containerWorkspaceFolder}/.pixi,type=volume"
   ],
-  "postCreateCommand": "bash .devcontainer/prepare-pi.sh && sudo chown vscode .pixi && pixi install && pixi run convert-to-notebooks && cd sessions/agentic-ml && pixi run skore skills install all --agent pi"
+  "postCreateCommand": "sudo chown vscode .pixi && pixi install && pixi run convert-to-notebooks"
 }
