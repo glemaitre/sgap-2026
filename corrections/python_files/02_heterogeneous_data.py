@@ -87,7 +87,8 @@ logistic_regression.fit(X_numeric, y)
 # missing values natively. We can use a `SimpleImputer` to replace the missing values
 # by the mean of the column.
 #
-# For this purpose, we can use a scikit-learn pipeline.
+# For this purpose, we can use a scikit-learn pipeline. A `Pipeline` chains steps and
+# exposes `fit` and `predict`, like the final estimator.
 
 # %%
 from sklearn.impute import SimpleImputer
@@ -140,6 +141,10 @@ logistic_regression[-1].n_iter_
 # %% [markdown]
 #
 # It only requires 11 iterations. We can now evaluate the model using cross-validation.
+#
+# The imputer is inside the pipeline, so `cross_validate` refits it on each training
+# fold. Fitting it on the whole dataset before the split would leak information into
+# the score.
 
 # %%
 from sklearn.model_selection import cross_validate

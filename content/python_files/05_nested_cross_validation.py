@@ -108,6 +108,9 @@ for estimator in cv_results["estimator"]:
 # probabilistic model, we should instead optimize a proper scoring function
 # rather than a threshold-based metric. So we can optimize the log loss instead of
 # the accuracy.
+#
+# Scikit-learn scores are higher-is-better, so an error such as the log loss is passed
+# as `neg_log_loss`. The values stored in the report are negative.
 
 # %%
 cv_results = cross_validate(tuned_model, X, y, cv=5, scoring="neg_log_loss", return_estimator=True)

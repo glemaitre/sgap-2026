@@ -1,6 +1,6 @@
 # SGAP 2026
 
-Course on model evaluation and validation with scikit-learn and skrub.
+Course on model evaluation and validation with scikit-learn, skrub, and skore.
 
 ## Browse and run the course
 
