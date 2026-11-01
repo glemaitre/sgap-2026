@@ -34,7 +34,15 @@ target_name = "Species"
 X = df[feature_names]
 y = df[target_name]
 
-categorical_columns = X.select_dtypes(include="object").columns
+# %% [markdown]
+#
+# One penguin has `Sex` recorded as `.`. That token is not a sex, so we replace it with
+# a missing value. A cross-validation fold can otherwise meet it only in the test rows,
+# and the encoder warns about an unknown category.
+
+# %%
+X["Sex"] = X["Sex"].replace(".", pd.NA)
+categorical_columns = X.select_dtypes(include=["object", "str"]).columns
 X[categorical_columns] = X[categorical_columns].astype("category")
 
 # %%
