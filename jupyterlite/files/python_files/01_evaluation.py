@@ -247,9 +247,9 @@ print(
 # %% [markdown]
 #
 # Each printed number is a single estimate of the generalization error, the error on
-# data held out to mimic future production data. It has no variance. A lower value on
-# this split is not evidence that the improvement is significant: we cannot tell
-# whether the difference would show up again on another split.
+# data held out to mimic future production data. That error still varies from one
+# partition to another, and a single split hides the spread. The next exercise draws
+# several seeds so the spread becomes visible.
 
 # %% [markdown]
 #

@@ -3721,7 +3721,7 @@ a.param-doc-link::before {
                                               SquashingScaler(max_absolute_value=5)),
                                              (&#x27;logisticregression&#x27;,
                                               LogisticRegression())]),
-                   param_distributions={&#x27;logisticregression__C&#x27;: &lt;scipy.stats._distn_infrastructure.rv_continuous_frozen object at 0x7ff3eecd74d0&gt;,
+                   param_distributions={&#x27;logisticregression__C&#x27;: &lt;scipy.stats._distn_infrastructure.rv_continuous_frozen object at 0x7f696feb34d0&gt;,
                                         &#x27;simpleimputer__strategy&#x27;: [&#x27;mean&#x27;,
                                                                     &#x27;median&#x27;,
                                                                     &#x27;most_frequent&#x27;]},
@@ -3768,7 +3768,7 @@ a.param-doc-link::before {
             param_distributions: dict or list of dicts<br><br>Dictionary with parameters names (`str`) as keys and distributions<br>or lists of parameters to try. Distributions must provide a ``rvs``<br>method for sampling (such as those from scipy.stats.distributions).<br>If a list is given, it is sampled uniformly.<br>If a list of dicts is given, first a dict is sampled uniformly, and<br>then a parameter is sampled using that dict as above.</span>
         </a>
     </td>
-            <td class="value">{&#x27;logisticregression__C&#x27;: &lt;scipy.stats....x7ff3eecd74d0&gt;, &#x27;simpleimputer__strategy&#x27;: [&#x27;mean&#x27;, &#x27;median&#x27;, ...]}</td>
+            <td class="value">{&#x27;logisticregression__C&#x27;: &lt;scipy.stats....x7f696feb34d0&gt;, &#x27;simpleimputer__strategy&#x27;: [&#x27;mean&#x27;, &#x27;median&#x27;, ...]}</td>
         </tr>
     
 
@@ -5345,36 +5345,36 @@ forceTheme('sk-container-id-2');</script></body></div></div>
   <tbody>
     <tr>
       <th>0</th>
-      <td>2.741552</td>
-      <td>0.017124</td>
+      <td>1.816702</td>
+      <td>0.011538</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>0.913043</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2.671613</td>
-      <td>0.017332</td>
+      <td>1.724915</td>
+      <td>0.011526</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>0.826087</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2.655865</td>
-      <td>0.017040</td>
+      <td>1.717835</td>
+      <td>0.011473</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>0.884058</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>2.640768</td>
-      <td>0.016924</td>
+      <td>1.705436</td>
+      <td>0.011479</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>0.913043</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>2.650475</td>
-      <td>0.017204</td>
+      <td>1.697555</td>
+      <td>0.011466</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>0.750000</td>
     </tr>
@@ -5400,16 +5400,26 @@ forceTheme('sk-container-id-2');</script></body></div></div>
 </div>
 </div>
 </div>
-<p>However, the previous approach is not the best way to tune hyperparameters.
-We used the default score that is the accuracy here. However, if we have a
-probabilistic model, we should instead optimize a proper scoring function
-rather than a threshold-based metric. So we can optimize the log loss instead of
-the accuracy.</p>
-<p>Scikit-learn scores are higher-is-better, so an error such as the log loss is passed
-as <code class="docutils literal notranslate"><span class="pre">neg_log_loss</span></code>. The values stored in the report are negative.</p>
+<p>The search above uses the default score, accuracy. For a model that predicts
+probabilities, the log loss is a proper scoring rule, so it matches those
+probabilities. We pass <code class="docutils literal notranslate"><span class="pre">neg_log_loss</span></code> to <code class="docutils literal notranslate"><span class="pre">RandomizedSearchCV</span></code>. Each inner split
+then selects the hyperparameters with the smallest log loss.</p>
+<p>Scikit-learn scores are higher-is-better, so the log loss is passed with a <code class="docutils literal notranslate"><span class="pre">neg_</span></code>
+prefix. The values stored by <code class="docutils literal notranslate"><span class="pre">cross_validate</span></code> are negative: a value closer to zero
+is a smaller log loss.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cv_results</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span><span class="n">tuned_model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s2">"neg_log_loss"</span><span class="p">,</span> <span class="n">return_estimator</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tuned_model</span> <span class="o">=</span> <span class="n">RandomizedSearchCV</span><span class="p">(</span>
+    <span class="n">logistic_regression</span><span class="p">,</span>
+    <span class="n">param_distributions</span><span class="o">=</span><span class="n">param_distributions</span><span class="p">,</span>
+    <span class="n">n_iter</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">scoring</span><span class="o">=</span><span class="s2">"neg_log_loss"</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">cv_results</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span>
+    <span class="n">tuned_model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s2">"neg_log_loss"</span><span class="p">,</span> <span class="n">return_estimator</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
 <span class="n">cv_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">cv_results</span><span class="p">)</span>
 <span class="n">cv_results</span>
 </pre></div>
@@ -5443,38 +5453,38 @@ as <code class="docutils literal notranslate"><span class="pre">neg_log_loss</sp
   <tbody>
     <tr>
       <th>0</th>
-      <td>2.653493</td>
-      <td>0.019074</td>
+      <td>1.753803</td>
+      <td>0.012476</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
-      <td>-0.175154</td>
+      <td>-0.175685</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2.669523</td>
-      <td>0.019704</td>
+      <td>1.753463</td>
+      <td>0.013146</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
-      <td>-0.307997</td>
+      <td>-0.296313</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2.758756</td>
-      <td>0.019188</td>
+      <td>1.846461</td>
+      <td>0.012395</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>-0.202089</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>2.641881</td>
-      <td>0.018322</td>
+      <td>1.765546</td>
+      <td>0.012550</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
-      <td>-0.208810</td>
+      <td>-0.194792</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>2.634383</td>
-      <td>0.019428</td>
+      <td>1.769762</td>
+      <td>0.012677</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
-      <td>-0.398071</td>
+      <td>-0.431597</td>
     </tr>
   </tbody>
 </table>
@@ -5488,11 +5498,11 @@ as <code class="docutils literal notranslate"><span class="pre">neg_log_loss</sp
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'logisticregression__C': np.float64(1.96282248134428), 'simpleimputer__strategy': 'median'}
-{'logisticregression__C': np.float64(116.30395714480302), 'simpleimputer__strategy': 'median'}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'logisticregression__C': np.float64(5.5129262250874245), 'simpleimputer__strategy': 'most_frequent'}
+{'logisticregression__C': np.float64(5.5129262250874245), 'simpleimputer__strategy': 'most_frequent'}
 {'logisticregression__C': np.float64(1.96282248134428), 'simpleimputer__strategy': 'median'}
-{'logisticregression__C': np.float64(1.96282248134428), 'simpleimputer__strategy': 'median'}
-{'logisticregression__C': np.float64(1.96282248134428), 'simpleimputer__strategy': 'median'}
+{'logisticregression__C': np.float64(5.5129262250874245), 'simpleimputer__strategy': 'most_frequent'}
+{'logisticregression__C': np.float64(5.5129262250874245), 'simpleimputer__strategy': 'most_frequent'}
 </pre></div>
 </div>
 </div>
