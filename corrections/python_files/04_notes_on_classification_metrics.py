@@ -50,7 +50,7 @@ hist_gradient_boosting = HistGradientBoostingClassifier(categorical_features="fr
 
 # %% [markdown]
 #
-# We used in the previous notebook the `cross_validate` function to evaluate the
+# In the previous notebook, we used the `cross_validate` function to evaluate the
 # performance of the model.
 
 # %%
@@ -65,18 +65,18 @@ cv_results[["train_score", "test_score"]]
 #
 # The score used by default in this case is the accuracy. However, accuracy is not
 # always the best metric to evaluate the performance of a classifier. It is actually
-# an issue with imbalanced datasets. We can check the ratio of the class on our dataset.
+# an issue with imbalanced datasets. We can check the ratio of each class in our dataset.
 
 # %%
 y.value_counts(normalize=True)
 
 # %% [markdown]
 #
-# So we already see if we predict always the majority class, we will get an accuracy of
-# around 0.7. Therefore, when interpreting the accuracy obtained from the
+# So we already see that if we always predict the majority class, we will get an
+# accuracy of around 0.7. Therefore, when interpreting the accuracy obtained from the
 # cross-validation, we should keep this in mind.
 #
-# Otherwise, we have some other metrics that we could use to evaluate the performance of
+# There are also other metrics that we could use to evaluate the performance of
 # a classifier. To check these metrics, we can check the `classification_report`
 # function.
 
@@ -109,8 +109,8 @@ _ = display.ax_.set(
 #
 # An important point to notice is that we used the method `predict` to compute these
 # metrics. However, when dealing with classification, we could use the probabilistic
-# properties of our classifier. Here, we will illustrate what are the probabilities
-# output provided by the classifier and how those are transformed into a class.
+# properties of our classifier. Here, we will illustrate the probability outputs
+# provided by the classifier and how those are transformed into a class.
 #
 # The method `predict_proba` provides the probabilities of each class.
 
@@ -127,7 +127,7 @@ y_pred.sum(axis=1)
 
 # %% [markdown]
 #
-# The method `predict` is using a threshold of 0.5 to convert the probabilities into
+# The method `predict` uses a threshold of 0.5 to convert the probabilities into
 # classes. This could be done by taking the `argmax` of the probabilities.
 
 # %%
@@ -142,9 +142,9 @@ hist_gradient_boosting.classes_[y_pred.argmax(axis=1)]
 # threshold and compute the confusion matrix and subsequent metrics. It will therefore
 # create a curve.
 #
-# In classification, there is two main curves that are known: the ROC curve and the
+# In classification, there are two main curves that are known: the ROC curve and the
 # precision-recall curve. They usually show some trade-off regarding our classifier.
-# Let's start to look at the precision-recall curve.
+# Let's start by looking at the precision-recall curve.
 
 # %%
 from sklearn.metrics import PrecisionRecallDisplay
@@ -205,15 +205,15 @@ _ = display.ax_.set(xlabel="False Positive Rate", ylabel="True Positive Rate", t
 
 # %% [markdown]
 #
-# The usage of these curves are chosen depending on the problem at end and the
+# Which of these curves to use depends on the problem at hand and on the
 # community.
 #
-# One important point concept to understand here is that these curves are evaluating
-# the discriminative power of a classifier or in other words the ranking of the
+# One important concept to understand here is that these curves evaluate
+# the discriminative power of a classifier, or in other words the ranking of the
 # predictions.
 #
-# However, we don't evaluate if the probability estimates of the classifier are
-# precise as known as well-calibrated. We can check the calibration of a classifier
+# However, we don't evaluate whether the probability estimates of the classifier are
+# precise, also known as well calibrated. We can check the calibration of a classifier
 # using the `CalibrationDisplay`. This is also known as a reliability diagram.
 
 # %%
@@ -305,7 +305,7 @@ _ = display.ax_.set(xlabel="Recall", ylabel="Precision", title="Precision-Recall
 
 # %% [markdown]
 #
-# Let's find on this curve, which model is maximizing the F1-score.
+# Let's find which model on this curve maximizes the F1-score.
 
 # %%
 from sklearn.metrics import f1_score, make_scorer

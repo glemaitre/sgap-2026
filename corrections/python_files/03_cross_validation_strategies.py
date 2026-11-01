@@ -3,12 +3,12 @@
 # # Cross-validation strategies
 #
 # The previous notebooks introduced how to evaluate a model and how to create a
-# specific preprocessing pipeline depending of the last model.
+# specific preprocessing pipeline depending on the last model.
 #
-# In this notebook, we will check a bit more some details regarding the cross-validation
-# strategies and some of the pitfalls that we can encounter.
+# In this notebook, we will look more closely at some details of the cross-validation
+# strategies and at some of the pitfalls that we can encounter.
 #
-# Let's take iris dataset and evaluate a logistic regression model.
+# Let's take the iris dataset and evaluate a logistic regression model.
 
 # %%
 from sklearn.datasets import load_iris
@@ -40,7 +40,7 @@ cv_results[["train_score", "test_score"]]
 
 # %% [markdown]
 #
-# We observe that the training score is always zero that is really surprising. We can
+# We observe that the training score is always zero, which is really surprising. We can
 # check the target to understand why.
 
 # %%
@@ -134,7 +134,7 @@ for cv_fold_idx, (train_indices, test_indices) in enumerate(cv.split(df, target)
 # %% [markdown]
 #
 # Now, let's check the documentation of the `cross_validate` function to see if this
-# function was already providing a way to stratify the data.
+# function already provides a way to stratify the data.
 
 # %%
 help(cross_validate)
@@ -161,7 +161,7 @@ logistic_regression = make_pipeline(MinMaxScaler(), LogisticRegression())
 
 # %% [markdown]
 #
-# Let's start to evaluate the model using a `KFold` object, once without shuffling and
+# Let's start by evaluating the model using a `KFold` object, once without shuffling and
 # once with shuffling.
 
 # %%
@@ -182,7 +182,7 @@ print(
 
 # %% [markdown]
 #
-# Surprisingly, the mean test score is increasing when shuffling the data. Let's check
+# Surprisingly, the mean test score increases when shuffling the data. Let's check
 # if this is due to the random seed.
 
 # %%
@@ -197,20 +197,20 @@ for seed in range(10):
 # %% [markdown]
 #
 # Apparently not. The reason is that the samples are grouped by writer. By shuffling,
-# we are mixing the samples from different writers. Therefore, we are learning a model
-# on some writers that are also used to test. However, if we want to have a model that
+# we are mixing the samples from different writers. Therefore, we are fitting a model
+# on writers that also appear in the test set. However, if we want to have a model that
 # generalizes well to new writers, we should not mix the samples from the same writer
-# between the training and testing set.
+# between the training and testing sets.
 #
-# Here, we provide a `groups` array that mentioned the writer ID for each sample.
+# Here, we provide a `groups` array that gives the writer ID for each sample.
 
 # %%
 from itertools import count
 
 import numpy as np
 
-# defines the lower and upper bounds of sample indices
-# for each writer
+# Define the lower and upper bounds of sample indices
+# for each writer.
 writer_boundaries = [
     0,
     130,
@@ -243,7 +243,7 @@ plt.yticks(np.unique(groups))
 plt.xticks(writer_boundaries, rotation=90)
 plt.xlabel("Target index")
 plt.ylabel("Writer index")
-_ = plt.title("Underlying writer groups existing in the target")
+_ = plt.title("Underlying writer groups present in the target")
 
 # %% [markdown]
 #

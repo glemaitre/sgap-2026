@@ -36,7 +36,7 @@ y = df[target_name]
 
 # %% [markdown]
 #
-# Before to evaluate model through cross-validation, we will first look at model
+# Before evaluating a model through cross-validation, we will first look at a model
 # using a single split.
 
 # %%
@@ -170,7 +170,7 @@ X_encoded
 
 # %% [markdown]
 #
-# It replace a category by an integer. However, with linear models, it means that we
+# It replaces a category by an integer. However, with linear models, it means that we
 # would assume that the difference between two categories is the same. Also, there is
 # an ordering imposed by this transformation.
 #
@@ -199,7 +199,7 @@ cv_results[["train_score", "test_score"]]
 
 # %% [markdown]
 #
-# We get an error for one of the split. This is due to the fact that some categories are
+# We get an error for one of the splits. This is due to the fact that some categories are
 # not present in the test set. We can handle this issue by ignoring the unknown
 # categories. This is given by a parameter in the `OneHotEncoder`.
 
@@ -218,7 +218,7 @@ cv_results[["train_score", "test_score"]]
 #
 # Now, we need to combine both numerical and categorical preprocessing and feed the
 # output to a single linear model. The `ColumnTransformer` class is designed for this
-# purpose: we provide a list of columns such that it will be transformed by a specific
+# purpose: we provide a list of columns so that they are transformed by a specific
 # transformer (or a pipeline of transformers). This `ColumnTransformer` can be used as
 # a preprocessing stage of a pipeline containing a linear model as the final stage.
 
@@ -247,10 +247,10 @@ cv_results
 
 # %% [markdown]
 #
-# We gave basic preprocessing steps for linear model. However, there is another group
+# We gave basic preprocessing steps for a linear model. However, there is another group
 # of models that can handle heterogeneous data: tree-based models. Those models do not
-# require scaling. Some in scikit-learn can even handle categorical data directly, if
-# they are tagged as categorical data.
+# require scaling. Some of them in scikit-learn can even handle categorical data
+# directly, if the columns are tagged as categorical.
 
 # %%
 categorical_columns = categorical_selector(X)

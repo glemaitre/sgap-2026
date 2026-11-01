@@ -5,7 +5,7 @@
 # In this first notebook, we show how to evaluate a predictive model.
 #
 # Let's consider a simple regression problem by loading a subset of the penguins
-# dataset. Let's check what are the data available in this dataset.
+# dataset. Let's check what data are available in this dataset.
 
 # %%
 import pandas as pd
@@ -46,8 +46,8 @@ print(f"The dimensions of y are: {y.shape}")
 # %% [markdown]
 #
 # Here, the matrix `X` only contains a single feature. However, in the future, we might
-# want to add several features that allow use to predict the target `y`. The target `y`
-# is a one-dimensional array here meaning that we only predict a single target. Note
+# want to add several features that allow us to predict the target `y`. The target `y`
+# is a one-dimensional array here, meaning that we only predict a single target. Note
 # that in some cases, it is possible that the target to be predicted is a
 # multi-dimensional array.
 #
@@ -55,7 +55,7 @@ print(f"The dimensions of y are: {y.shape}")
 # setting. In other cases, we might want to predict a categorical target. This is called
 # a classification problem.
 #
-# Let's start to fit a scikit-learn model that is a simple linear regression model.
+# Let's start by fitting a scikit-learn model that is a simple linear regression model.
 
 # %%
 from sklearn.linear_model import LinearRegression
@@ -86,7 +86,7 @@ y_pred = linear_regression.predict(X_to_infer)
 
 # %% [markdown]
 #
-# The method `predict` allow us to get the prediction of the model on new data. Now,
+# The method `predict` allows us to get the prediction of the model on new data. Now,
 # we plot the obtained values.
 
 # %%
@@ -111,10 +111,10 @@ print(f"The mean squared error is: {error:.2f}")
 #
 # To emphasize the fact that `LinearRegression` minimizes the mean squared error, we can
 # use another linear model that minimizes another metric. `QuantileRegressor` is a
-# a linear model that minimizes the median absolute error. Indeed, this is an estimator
+# linear model that minimizes the median absolute error. Indeed, this is an estimator
 # of the median of the conditional distribution of the target.
 #
-# Let's fit such model and compare the mean squared error.
+# Let's fit such a model and compare the mean squared error.
 
 # %%
 from sklearn.linear_model import QuantileRegressor
@@ -166,12 +166,12 @@ print(f"The median absolute error of QuantileRegression is: {error:.2f}")
 # %% [markdown]
 #
 # In terms of median absolute error, we observe that the `QuantileRegressor` has a lower
-# error than the `LinearRegression`. It is in-line with the fact that the
+# error than the `LinearRegression`. It is in line with the fact that the
 # `QuantileRegressor` minimizes the median absolute error.
 #
 # Up to now, we have been evaluating the model on the same dataset but it does not tell
 # us how well the model will generalize to new data. Let's imagine that we have a more
-# complex model that make some data engineering. We can use a polynomial feature
+# complex model that does some data engineering. We can use a polynomial feature
 # expansion to create a more complex model.
 #
 # Let's first demonstrate how to create a polynomial feature expansion with
@@ -188,7 +188,7 @@ X_poly
 
 # %% [markdown]
 #
-# Scikit-learn transformers are models that have a `fit` and `transform` methods. The
+# Scikit-learn transformers are models that have `fit` and `transform` methods. The
 # `fit` method will compute the required statistics to transform the data. The
 # `transform` method will apply the transformation to the data.
 #
@@ -208,11 +208,11 @@ _ = ax.legend()
 # %% [markdown]
 #
 # We observed that while our model is linear, the fact that we created non-linear
-# features lead to a non-linear relationship between the flipper length and the body
+# features leads to a non-linear relationship between the flipper length and the body
 # mass of the penguins.
 #
 # However, we have no way to compare the quality of this model with the previous model.
-# To do so, we need to put ourself in a situation where we have a training set and a
+# To do so, we need to put ourselves in a situation where we have a training set and a
 # testing set. The training set is the set used to create the model while the testing
 # set is used to evaluate the model on unseen data.
 
@@ -238,13 +238,13 @@ print(
 # %% [markdown]
 #
 # Now, by computing the mean absolute error on the testing set, we have an estimate of
-# potential generalization power of our models. Eventually, we could keep the best model
-# that leads to the lowest error on the testing set.
+# the potential generalization power of our models. Eventually, we could keep the best
+# model that leads to the lowest error on the testing set.
 #
-# However, we the results above, we have no idea of the variability of the error. We
-# might have been lucky while creating the training and testing set. To have a better
+# However, with the results above, we have no idea of the variability of the error. We
+# might have been lucky while creating the training and testing sets. To have a better
 # estimate of the error, we can use cross-validation: we will repeat the splitting of
-# the data into training and testing set several times.
+# the data into training and testing sets several times.
 
 # %%
 from sklearn.model_selection import KFold, cross_validate
@@ -268,8 +268,8 @@ cv_results
 # convention: the higher the score, the better the model. Since we used error metrics,
 # this convention will force us to use the negative values of the error.
 #
-# To access these metrics, we can pass a string to the `scoring` parameter. For error,
-# we need to add the `neg_` prefix and it leads to negative values in the report.
+# To access these metrics, we can pass a string to the `scoring` parameter. For an
+# error, we need to add the `neg_` prefix, and this leads to negative values in the report.
 #
 # We negate the values to get back meaningful values.
 
@@ -304,14 +304,14 @@ cv_results[["train_score", "test_score"]].describe()
 #
 # However, we have an issue with the pattern used here. By scaling the full dataset and
 # computing the polynomial features on the full dataset, we leak information from the
-# the testing set to the training set. Therefore, the scores obtained might be too
+# testing set to the training set. Therefore, the scores obtained might be too
 # optimistic.
 #
 # We should therefore make the split before scaling the data and computing the
 # polynomial features. Scikit-learn provides a `Pipeline` class that allows
 # to chain several transformers and a final estimator.
 #
-# In this way, we can declare a pipeline that do not require any data during its
+# In this way, we can declare a pipeline that does not require any data during its
 # declaration.
 
 # %%
@@ -324,7 +324,7 @@ linear_regression_poly
 
 # %% [markdown]
 #
-# This sequence of transformers and final learner provide the same API as the final
+# This sequence of transformers and final learner provides the same API as the final
 # learner. Under the hood, it will call the proper methods when we call `fit` and
 # `predict` methods.
 
@@ -363,8 +363,8 @@ cv_results[["train_score", "test_score"]].describe()
 
 # %% [markdown]
 #
-# In the previous cross-validation, we have only 5 estimations. We could repeat with
-# more splits an more shuffling and display the distribution of the error.
+# In the previous cross-validation, we only have 5 estimates. We could repeat with
+# more splits and more shuffling and display the distribution of the error.
 
 # %%
 from sklearn.model_selection import RepeatedKFold
