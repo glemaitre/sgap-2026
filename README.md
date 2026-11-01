@@ -13,7 +13,7 @@ Course on model evaluation and validation with scikit-learn, skrub, and skore.
 
 ## Run the notebooks
 
-The lesson sources are jupytext percent-format scripts in `content/python_files`. Generate notebooks into `content/notebooks` with:
+The notebooks are in `content/notebooks`. Their sources are the jupytext scripts in `content/python_files`. Regenerate the notebooks with:
 
 ```bash
 python utils/convert_to_notebooks.py
@@ -74,7 +74,7 @@ Update an existing environment with `conda env update -f environment.yml`.
 
 ## Corrections
 
-Solution scripts live in `corrections/python_files` and are not part of the published book or JupyterLite. Generate them with:
+Solution notebooks are in `corrections/notebooks`, from the scripts in `corrections/python_files`. They are not part of the published book or JupyterLite. Regenerate them with:
 
 ```bash
 pixi run convert-corrections

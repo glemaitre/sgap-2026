@@ -15,7 +15,7 @@ This course introduces model evaluation and validation with scikit-learn, skrub,
 
 ## Run the notebooks locally
 
-The lesson sources are in `content/python_files`. Generate notebooks with:
+The notebooks are in `content/notebooks`. Their sources are in `content/python_files`. Regenerate the notebooks with:
 
 ```bash
 python utils/convert_to_notebooks.py

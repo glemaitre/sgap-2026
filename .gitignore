@@ -47,10 +47,8 @@ coverage.xml
 # pixi environments
 .pixi
 
-# Generated notebooks
-content/notebooks
+# Notebooks written beside the jupytext scripts before they are moved
 content/python_files/*.ipynb
-corrections/notebooks
 corrections/python_files/*.ipynb
 
 # jupyter-book build
