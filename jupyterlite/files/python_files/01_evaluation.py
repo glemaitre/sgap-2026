@@ -14,7 +14,7 @@
 # Run this cell in JupyterLite. A local installation already provides these packages.
 
 # %%
-# %pip install -q "scikit-learn~=1.9.1" "skrub~=0.11.0" pandas matplotlib
+# %pip install -q "scikit-learn~=1.9.1" "skrub~=0.11.0" "skore~=0.29.0" pandas matplotlib
 
 # %%
 import pandas as pd
@@ -106,9 +106,14 @@ _ = ax.legend()
 
 # %% [markdown]
 #
-# This `LinearRegression` model is known to minimize the mean squared error. We can
-# compute this metric to know what would be the error on the same dataset that we used
-# to train the model.
+# This `LinearRegression` model minimizes the residual sum of squares, which is the
+# mean squared error up to a constant factor. The scikit-learn user guide presents this
+# estimator as
+# [ordinary least squares](https://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares).
+# The prediction is an estimate of the conditional mean of the body mass.
+#
+# We can compute the mean squared error on the same dataset that we used to train the
+# model.
 
 # %%
 from sklearn.metrics import mean_squared_error
@@ -120,93 +125,89 @@ print(f"The mean squared error is: {error:.2f}")
 #
 # ### Exercise
 #
-# Let's repeat the previous experiment by fitting again a linear model but this model
-# is known as a quantile regression. You can import it from
-# `sklearn.linear_model.QuantileRegressor`. Let's fit the median (look at the
-# documentation to know which parameter to set).
+# `LinearRegression` estimates the conditional mean. Another linear model,
+# `QuantileRegressor`, estimates a conditional quantile. The documentation is in the
+# user guide on
+# [quantile regression](https://scikit-learn.org/stable/modules/linear_model.html#quantile-regression)
+# and in the
+# [`QuantileRegressor` docstring](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.QuantileRegressor.html).
+#
+# The model minimizes the pinball loss. With `quantile=0.5`, the target is the
+# conditional median, and the loss matches the median absolute error. Set `alpha=0`:
+# the default value adds an L1 penalty and would confound the comparison with
+# `LinearRegression`.
+#
+# Fit this median model on the same data. Plot its predictions on the same figure as
+# the linear regression. Compute the mean squared error and the median absolute error
+# of both models.
+#
+# Which model wins on which metric? The model we choose depends on the quantity we
+# want to estimate, and that quantity should match the objective of the problem.
+
+# %%
+
+# %% [markdown]
+#
+# Up to now, we have evaluated the models on the same dataset used to fit them. This
+# does not tell us how well they generalize to new data.
+#
+# We set aside a testing set with `train_test_split`. The training set is used to
+# create the model, and the testing set is used to evaluate it on unseen data.
 
 # %%
 from sklearn.linear_model import QuantileRegressor
-
-# %% [markdown]
-#
-# Plot the prediction of the quantile regression model on the same plot as the linear
-# regression model to have a quantitative comparison.
-# Compute the mean squared error and compare it to the `LinearRegression` model.
-# Compute the median absolute error and compare it to the `LinearRegression` model.
-# Can you provide some insights?
-# %% [markdown]
-#
-# Up to now, we have been evaluating the model on the same dataset but it does not tell
-# us how well the model will generalize to new data. Let's imagine that we have a more
-# complex model that does some data engineering. We can use a polynomial feature
-# expansion to create a more complex model.
-#
-# Let's first demonstrate how to create a polynomial feature expansion with
-# scikit-learn transformers.
-# %%
-from sklearn.preprocessing import PolynomialFeatures, StandardScaler
-
-polynomial_features = PolynomialFeatures(degree=5).set_output(transform="pandas")
-standard_scaler = StandardScaler().set_output(transform="pandas")
-X_scaled = standard_scaler.fit_transform(X)
-X_poly = polynomial_features.fit_transform(X_scaled)
-X_poly
-
-# %% [markdown]
-#
-# Scikit-learn transformers are models that have `fit` and `transform` methods. The
-# `fit` method will compute the required statistics to transform the data. The
-# `transform` method will apply the transformation to the data.
-#
-# ### Exercise
-#
-# Fit a `LinearRegression` model on the `X_poly` data and predict the body mass of the
-# penguins. Plot the prediction on the same plot as the linear regression model and the
-# quantile regression model. Compute the mean squared error and compare it to the
-# previous models.
-
-# %%
-linear_regression.fit(X_poly, y)
-X_to_infer_poly = polynomial_features.transform(standard_scaler.transform(X_to_infer))
-y_pred_poly = linear_regression.predict(X_to_infer_poly)
-
-# %% [markdown]
-#
-# Up to now, we have no way to compare the quality of this model with the previous
-# model. To do so, we need to put ourselves in a situation where we have a training set
-# and a testing set. The training set is the set used to create the model while the
-# testing set is used to evaluate the model on unseen data.
-
-# %%
+from sklearn.metrics import median_absolute_error
 from sklearn.model_selection import train_test_split
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
 
-# %%
-from sklearn.metrics import mean_absolute_error
+# %% [markdown]
+#
+# We fit the linear model and the median model. The median model is a
+# `QuantileRegressor` with `quantile=0.5` and `alpha=0`, as in the exercise. We compare
+# them with the median absolute error on the testing set.
 
+# %%
 linear_regression.fit(X_train, y_train)
-y_pred = linear_regression.predict(X_test)
+quantile_regression = QuantileRegressor(quantile=0.5, alpha=0)
+quantile_regression.fit(X_train, y_train)
 print(
-    "Mean absolute error on the training set: "
-    f"{mean_absolute_error(y_train, linear_regression.predict(X_train)):.2f}"
+    "Median absolute error of the linear model on the testing set: "
+    f"{median_absolute_error(y_test, linear_regression.predict(X_test)):.2f}"
 )
 print(
-    "Mean absolute error on the testing set: "
-    f"{mean_absolute_error(y_test, linear_regression.predict(X_test)):.2f}"
+    "Median absolute error of the quantile model on the testing set: "
+    f"{median_absolute_error(y_test, quantile_regression.predict(X_test)):.2f}"
 )
 
 # %% [markdown]
 #
-# Now, by computing the mean absolute error on the testing set, we have an estimate of
-# the potential generalization power of our models. Eventually, we could keep the
-# best model that leads to the lowest error on the testing set.
+# Each printed number is a single estimate of the generalization error. It has no
+# variance. A lower value on this split is not evidence that the improvement is
+# significant: we cannot tell whether the difference would show up again on another
+# split.
+
+# %% [markdown]
 #
-# However, with the results above, we have no idea of the variability of the error. We
-# might have been lucky while creating the training and testing sets. To have a better
-# estimate of the error, we can use cross-validation: we will repeat the splitting of
-# the data into training and testing sets several times.
+# ### Exercise
+#
+# Repeat the train-test evaluation of the linear model for several seeds, and plot the
+# distribution of the test error.
+#
+# Use a `for` loop over `range`. At each seed, call `train_test_split` with
+# `random_state=seed`, fit the linear model, and append the median absolute error on
+# the test set to a list. Plot that list with `pandas.Series.plot.hist`.
+
+# %%
+
+# %% [markdown]
+#
+# Doing this repetition by hand is tedious. `cross_validate` repeats the split for us
+# and stores the results in a Python dictionary.
+#
+# We do not pass a scorer. For a regressor, the default score is the R² coefficient:
+# a higher score is better. This score is not the median absolute error from the
+# previous cells.
 
 # %%
 from sklearn.model_selection import KFold, cross_validate
@@ -217,118 +218,41 @@ cv_results = cross_validate(
     X,
     y,
     cv=cv,
-    scoring="neg_mean_absolute_error",
     return_train_score=True,
 )
 cv_results = pd.DataFrame(cv_results)
 cv_results
 
-# %% [markdown]
-#
-# The `cross_validate` function allows us to make this cross-validation and store the
-# important results in a Python dictionary. Note that scikit-learn uses a "score"
-# convention: the higher the score, the better the model. Since we used error metrics,
-# this convention will force us to use the negative values of the error.
-#
-# To access these metrics, we can pass a string to the `scoring` parameter. For an
-# error, we need to add the `neg_` prefix, and this leads to negative values in the report.
-#
-# We negate the values to get back meaningful values.
-
 # %%
-cv_results["test_score"] = -cv_results["test_score"]
-cv_results["train_score"] = -cv_results["train_score"]
 cv_results[["train_score", "test_score"]].describe()
 
 # %% [markdown]
 #
-# So now, we have an estimate of the mean absolute error and its variability. We can
-# compare it with the model using the polynomial features.
+# `skore.evaluate` runs the same kind of evaluation and reports the metrics directly.
+# The mean absolute error is available under the name `mean_absolute_error`, with no
+# `neg_` prefix.
 
 # %%
-cv_results = cross_validate(
-    linear_regression,
-    X_poly,
-    y,
-    cv=cv,
-    scoring="neg_mean_absolute_error",
-    return_train_score=True,
-)
-cv_results = pd.DataFrame(cv_results)
-cv_results["test_score"] = -cv_results["test_score"]
-cv_results["train_score"] = -cv_results["train_score"]
-cv_results[["train_score", "test_score"]].describe()
+from skore import evaluate
+
+report = evaluate(linear_regression, X, y, splitter=cv)
+report.metrics.summarize().frame()
+
+# %%
+report.metrics.add("mean_absolute_error")
+report.metrics.get("mean_absolute_error")
 
 # %% [markdown]
 #
-# We observe that the model using polynomial features has a lower mean absolute error
-# than the linear model.
-#
-# However, we have an issue with the pattern used here. By scaling the full dataset and
-# computing the polynomial features on the full dataset, we leak information from the
-# testing set to the training set. Therefore, the scores obtained might be too
-# optimistic.
-#
-# We should therefore make the split before scaling the data and computing the
-# polynomial features. Scikit-learn provides a `Pipeline` class that allows
-# to chain several transformers and a final estimator.
-#
-# In this way, we can declare a pipeline that does not require any data during its
-# declaration.
+# We can pass both models to the same function. The summary then gives the mean and
+# the standard deviation of each metric across the splits. This is the comparison that
+# a single split could not support.
 
 # %%
-from sklearn.pipeline import make_pipeline
-
-linear_regression_poly = make_pipeline(
-    StandardScaler(), PolynomialFeatures(degree=5), LinearRegression()
-)
-linear_regression_poly
-
-# %% [markdown]
-#
-# This sequence of transformers and final learner provides the same API as the final
-# learner. Under the hood, it will call the proper methods when we call `fit` and
-# `predict` methods.
-
-# %%
-linear_regression_poly.fit(X_train, y_train)
-linear_regression_poly[-1].coef_, linear_regression_poly[-1].intercept_
-
-# %%
-print(
-    "Mean absolute error on the training set: "
-    f"{mean_absolute_error(y_train, linear_regression_poly.predict(X_train)):.2f}"
-)
-print(
-    "Mean absolute error on the testing set: "
-    f"{mean_absolute_error(y_test, linear_regression_poly.predict(X_test)):.2f}"
-)
-
-# %% [markdown]
-#
-# So now, we can safely use this model in the `cross_validate` function and pass the
-# original data that will be transformed on-the-fly.
-
-# %%
-cv_results = cross_validate(
-    linear_regression_poly,
+comparison = evaluate(
+    {"linear": linear_regression, "quantile": quantile_regression},
     X,
     y,
-    cv=cv,
-    scoring="neg_mean_absolute_error",
-    return_train_score=True,
+    splitter=cv,
 )
-cv_results = pd.DataFrame(cv_results)
-cv_results["test_score"] = -cv_results["test_score"]
-cv_results["train_score"] = -cv_results["train_score"]
-cv_results[["train_score", "test_score"]].describe()
-
-# %% [markdown]
-#
-# ### Exercise
-#
-# Use a `sklearn.model_selection.RepeatedKFold` cross-validation strategy to evaluate
-# the performance of the linear regression model and the polynomial regression model.
-#
-# The idea is to repeat the split several times so that we can plot a distribution of
-# the test scores.
+comparison.metrics.summarize().frame()

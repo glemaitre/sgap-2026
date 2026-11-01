@@ -80,6 +80,10 @@ X_numeric = X.select_dtypes(include="number")
 # %% [markdown]
 #
 # Does it work?
+#
+# A scikit-learn `Pipeline` chains steps and exposes `fit` and `predict`, like the
+# final estimator. We use one here to impute missing values before the logistic
+# regression.
 
 # %%
 from sklearn.impute import SimpleImputer
@@ -132,6 +136,10 @@ logistic_regression[-1].n_iter_
 # %% [markdown]
 #
 # It only requires 11 iterations. We can now evaluate the model using cross-validation.
+#
+# The imputer is inside the pipeline, so `cross_validate` refits it on each training
+# fold. Fitting it on the whole dataset before the split would leak information into
+# the score.
 
 # %%
 from sklearn.model_selection import cross_validate
