@@ -56,6 +56,11 @@ print(f"The dimensions of y are: {y.shape}")
 # a classification problem.
 #
 # Let's start by fitting a scikit-learn model that is a simple linear regression model.
+# With a single feature, the predicted body mass is a straight line:
+#
+# $$
+# \text{predicted body mass} = \text{coef} \times \text{flipper length} + \text{intercept}
+# $$
 
 # %%
 from sklearn.linear_model import LinearRegression
@@ -65,9 +70,10 @@ linear_regression.fit(X, y)
 
 # %% [markdown]
 #
-# In scikit-learn, the method {py:meth}`~sklearn.linear_model.LinearRegression.fit` is used to train a model. In this case, it allows us
-# to find the best parameters of the linear regression model to fit the data. These
-# parameters are stored in the attributes `coef_` and `intercept_` of the instance.
+# In scikit-learn, the method {py:meth}`~sklearn.linear_model.LinearRegression.fit` is
+# used to train a model. In this case, it allows us to find the best parameters of the
+# linear regression model to fit the data. These parameters are stored in the attributes
+# `coef_` and `intercept_` of the instance.
 
 # %%
 linear_regression.coef_, linear_regression.intercept_
@@ -86,8 +92,8 @@ y_pred = linear_regression.predict(X_to_infer)
 
 # %% [markdown]
 #
-# The method {py:meth}`~sklearn.linear_model.LinearRegression.predict` allows us to get the prediction of the model on new data. Now,
-# we plot the obtained values.
+# The method {py:meth}`~sklearn.linear_model.LinearRegression.predict` allows us to get
+# the prediction of the model on new data. Now, we plot the obtained values.
 
 # %%
 ax = df.plot.scatter(x="Flipper Length (mm)", y="Body Mass (g)")
@@ -97,11 +103,58 @@ _ = ax.legend()
 
 # %% [markdown]
 #
-# This {py:class}`~sklearn.linear_model.LinearRegression` model minimizes the residual sum of squares, which is the
-# mean squared error up to a constant factor. The scikit-learn user guide presents this
-# estimator as
-# [ordinary least squares](https://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares).
+# Fitting chooses the coefficient and the intercept that minimize a loss. For
+# {py:class}`~sklearn.linear_model.LinearRegression`, that loss is the residual sum of
+# squares between the observed body mass and the prediction:
+#
+# $$
+# \text{RSS}(\text{coef}, \text{intercept}) =
+# \sum_{i=1}^{n} \left(y_i - (\text{coef} \times x_i + \text{intercept})\right)^2
+# $$
+#
+# $x_i$ is the flipper length of penguin $i$ and $y_i$ is its body mass. The mean
+# squared error is this sum divided by $n$. The factor $1/n$ does not depend on the
+# parameters, so both losses are minimized by the same coefficient and intercept. The
+# scikit-learn user guide presents this estimator as [ordinary least
+# squares](https://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares).
 # The prediction is an estimate of the conditional mean of the body mass.
+#
+# ```{note}
+# The same loss can be minimized by gradient descent. The gradient is the pair of
+# partial derivatives of the residual sum of squares with respect to the coefficient
+# and the intercept:
+#
+# $$
+# \frac{\partial \text{RSS}}{\partial \text{coef}} =
+# -2 \sum_{i=1}^{n} \left(y_i - (\text{coef} \times x_i + \text{intercept})\right) x_i
+# $$
+#
+# $$
+# \frac{\partial \text{RSS}}{\partial \text{intercept}} =
+# -2 \sum_{i=1}^{n} \left(y_i - (\text{coef} \times x_i + \text{intercept})\right)
+# $$
+#
+# The term in parentheses is the residual of penguin $i$. Differentiating the squared
+# residual brings a factor $2$, and the minus sign comes from the residual decreasing
+# when the prediction increases. The coefficient derivative has an extra $x_i$ because
+# the prediction depends on the coefficient through $\text{coef} \times x_i$.
+#
+# Each partial derivative is the rate at which the loss increases when that parameter
+# increases. An optimizer starts from some parameters and repeatedly steps in the
+# opposite direction, with $\eta$ the learning rate:
+#
+# $$
+# \text{coef} \leftarrow
+# \text{coef} - \eta \frac{\partial \text{RSS}}{\partial \text{coef}}
+# \qquad
+# \text{intercept} \leftarrow
+# \text{intercept} - \eta \frac{\partial \text{RSS}}{\partial \text{intercept}}
+# $$
+#
+# With a small enough learning rate, each step reduces the loss. This loss is a convex
+# quadratic, so the updates then reach the ordinary least-squares solution.
+# {py:class}`~sklearn.linear_model.LinearRegression` computes that solution directly.
+# ```
 #
 # We can compute the mean squared error on the same dataset that we used to train the
 # model.
