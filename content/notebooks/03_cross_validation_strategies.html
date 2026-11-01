@@ -362,11 +362,7 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
 </ul>
             </nav>
         </div>
@@ -1889,10 +1885,14 @@ function forceTheme(elementId) {
 
 forceTheme('sk-container-id-1');</script></body></div></div>
 </div>
-<section id="exercise">
-<h3>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
-<p>Evaluate the previous <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticRegression</span></code></a> model using a 3-fold cross-validation
-(i.e. <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.model_selection.KFold</span></code></a>). What do you observe?</p>
+<div class="tip admonition">
+<p class="admonition-title">Exercise</p>
+<ul class="simple">
+<li><p>Evaluate the previous <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticRegression</span></code></a> model
+using a 3-fold cross-validation (i.e. <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.model_selection.KFold</span></code></a>).</p></li>
+<li><p>What do you observe?</p></li>
+</ul>
+</div>
 <p>We observe that the training score is always zero, which is really surprising. We can
 check the target to understand why.</p>
 <p>We can use a <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedKFold.html#sklearn.model_selection.StratifiedKFold" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">StratifiedKFold</span></code></a> object to ensure that the class distribution is
@@ -2414,15 +2414,17 @@ data.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="id1">
-<h3>Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="tip admonition">
+<p class="admonition-title">Exercise</p>
 <p>Evaluate the model and compare two strategies:</p>
 <ul class="simple">
-<li><p>using a <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">KFold</span></code></a> object with 13 splits without shuffling the data;</p></li>
-<li><p>using a <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">KFold</span></code></a> object with 13 splits with shuffling the data.</p></li>
+<li><p>Use a <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">KFold</span></code></a> object with 13 splits without
+shuffling the data.</p></li>
+<li><p>Use a <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">KFold</span></code></a> object with 13 splits with
+shuffling the data.</p></li>
+<li><p>What do you observe? What are the causes of the differences?</p></li>
 </ul>
-<p>What do you observe? What are the causes of the differences?</p>
+</div>
 <p>Here, we provide a <code class="docutils literal notranslate"><span class="pre">groups</span></code> array that gives the writer ID for each sample.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2501,7 +2503,6 @@ data.</p>
 performance of the model.</p>
 </section>
 </section>
-</section>
 
     <script type="text/x-thebe-config">
     {
@@ -2569,11 +2570,7 @@ performance of the model.</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
 </ul>
   </nav></div>
 

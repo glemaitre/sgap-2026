@@ -129,10 +129,14 @@ pd.DataFrame(y_pred, columns=hist_gradient_boosting.classes_).head()
 
 # %% [markdown]
 #
-# ### Exercise
+# ```{admonition} Exercise
+# :class: tip
 #
-# Try to find the relationship to go from the probabilities to the classes, or
-# in other words to go from the output of {py:meth}`~sklearn.ensemble.HistGradientBoostingClassifier.predict_proba` to the output of {py:meth}`~sklearn.ensemble.HistGradientBoostingClassifier.predict`.
+# Try to find the relationship to go from the probabilities to the classes, or in other
+# words to go from the output of
+# {py:meth}`~sklearn.ensemble.HistGradientBoostingClassifier.predict_proba` to the
+# output of {py:meth}`~sklearn.ensemble.HistGradientBoostingClassifier.predict`.
+# ```
 
 # %% [markdown]
 #
@@ -193,10 +197,12 @@ _ = display.ax_.set(xlabel="Recall", ylabel="Precision", title="Precision-Recall
 
 # %% [markdown]
 #
-# ### Exercise
+# ```{admonition} Exercise
+# :class: tip
 #
-# Make the same analysis by plotting the ROC curve. I let you check the documentation
-# of scikit-learn to find the right classes to use.
+# Make the same analysis by plotting the ROC curve. Check the scikit-learn
+# documentation to find the right classes to use.
+# ```
 
 # %%
 

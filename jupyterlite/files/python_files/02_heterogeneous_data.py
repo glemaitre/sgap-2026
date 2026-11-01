@@ -55,9 +55,11 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
 
 # %% [markdown]
 #
-# ### Exercise
+# ```{admonition} Exercise
+# :class: tip
 #
 # Fit a {py:class}`~sklearn.linear_model.LogisticRegression` model on the training data.
+# ```
 
 # %%
 from sklearn.linear_model import LogisticRegression
@@ -71,9 +73,11 @@ X_numeric = X.select_dtypes(include="number")
 
 # %% [markdown]
 #
-# ### Exercise
+# ```{admonition} Exercise
+# :class: tip
 #
 # Fit a {py:class}`~sklearn.linear_model.LogisticRegression` model on the numerical data.
+# ```
 
 # %%
 
@@ -160,10 +164,12 @@ X_categorical
 
 # %% [markdown]
 #
-# ### Exercise
+# ```{admonition} Exercise
+# :class: tip
 #
-# Think of a way to transform the string categories into numerical data.
-# Come up with your own transform and evaluate the model using cross-validation.
+# - Think of a way to transform the string categories into numerical data.
+# - Come up with your own transform and evaluate the model using cross-validation.
+# ```
 
 # %% [markdown]
 #
@@ -259,8 +265,12 @@ cv_results
 # We gave basic preprocessing steps for a linear model. However, there is another group
 # of models that can handle heterogeneous data: tree-based models.
 #
-# ### Exercise
+# ```{admonition} Exercise
+# :class: tip
 #
-# Looking at the documentation, create and evaluate a {py:class}`~sklearn.ensemble.HistGradientBoostingClassifier`
-# model on the penguins dataset. You are free to create any preprocessing steps you
-# want.
+# Looking at the documentation:
+#
+# - Create a {py:class}`~sklearn.ensemble.HistGradientBoostingClassifier` model on the
+#   penguins dataset. You are free to create any preprocessing steps you want.
+# - Evaluate the model.
+# ```

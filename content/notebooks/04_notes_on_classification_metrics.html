@@ -363,11 +363,7 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Notes related to classification metrics</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-section">Bonus section</a></li>
@@ -700,7 +696,7 @@ notebook.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2862/4149670560.py:13: Pandas4Warning: For backward compatibility, 'str' dtypes are included by select_dtypes when 'object' dtype is specified. This behavior is deprecated and will be removed in a future version. Explicitly pass 'str' to `include` to select them, or to `exclude` to remove them and silence this warning.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2847/4149670560.py:13: Pandas4Warning: For backward compatibility, 'str' dtypes are included by select_dtypes when 'object' dtype is specified. This behavior is deprecated and will be removed in a future version. Explicitly pass 'str' to `include` to select them, or to `exclude` to remove them and silence this warning.
 See https://pandas.pydata.org/docs/dev/user_guide/migration.html#string-migration-select-dtypes for details on how to write code that works with pandas 2 and 3.
   categorical_columns = X.select_dtypes(include="object").columns
 </pre></div>
@@ -930,10 +926,13 @@ provided by the classifier and how those are transformed into a class.</p>
 </table>
 </div></div></div>
 </div>
-<section id="exercise">
-<h3>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
-<p>Try to find the relationship to go from the probabilities to the classes, or
-in other words to go from the output of <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html#sklearn.ensemble.HistGradientBoostingClassifier.predict_proba" title="(in scikit-learn v1.9)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">predict_proba()</span></code></a> to the output of <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html#sklearn.ensemble.HistGradientBoostingClassifier.predict" title="(in scikit-learn v1.9)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">predict()</span></code></a>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Exercise</p>
+<p>Try to find the relationship to go from the probabilities to the classes, or in other
+words to go from the output of
+<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html#sklearn.ensemble.HistGradientBoostingClassifier.predict_proba" title="(in scikit-learn v1.9)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">predict_proba()</span></code></a> to the
+output of <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html#sklearn.ensemble.HistGradientBoostingClassifier.predict" title="(in scikit-learn v1.9)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">predict()</span></code></a>.</p>
+</div>
 <p>So it means that the threshold of 0.5 is completely arbitrary. We could change this
 threshold and compute the confusion matrix and subsequent metrics. It will therefore
 create a curve.</p>
@@ -1006,11 +1005,11 @@ We use the <a class="reference external" href="https://scikit-learn.org/stable/m
 <img alt="../../_images/b7e64d560e6e7943fd558c1c3ef53279854f749a9a68201bf386f77a2a405eba.png" src="../../_images/b7e64d560e6e7943fd558c1c3ef53279854f749a9a68201bf386f77a2a405eba.png" />
 </div>
 </div>
-</section>
-<section id="id1">
-<h3>Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
-<p>Make the same analysis by plotting the ROC curve. I let you check the documentation
-of scikit-learn to find the right classes to use.</p>
+<div class="tip admonition">
+<p class="admonition-title">Exercise</p>
+<p>Make the same analysis by plotting the ROC curve. Check the scikit-learn
+documentation to find the right classes to use.</p>
+</div>
 <p>Which of these curves to use depends on the problem at hand and on the
 community.</p>
 <p>One important concept to understand here is that these curves evaluate
@@ -4029,7 +4028,6 @@ Brier score of the LogisticRegression: 0.18
 <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html#sklearn.ensemble.HistGradientBoostingClassifier" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">HistGradientBoostingClassifier</span></code></a> than for the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticRegression</span></code></a>.</p>
 </section>
 </section>
-</section>
 <section class="tex2jax_ignore mathjax_ignore" id="bonus-section">
 <h1>Bonus section<a class="headerlink" href="#bonus-section" title="Link to this heading">#</a></h1>
 <p>We will do this part if we have time. In the previous section, we saw that the
@@ -6055,11 +6053,7 @@ forceTheme('sk-container-id-2');</script></body></div></div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Notes related to classification metrics</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-section">Bonus section</a></li>
