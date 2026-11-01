@@ -3721,7 +3721,7 @@ a.param-doc-link::before {
                                               SquashingScaler(max_absolute_value=5)),
                                              (&#x27;logisticregression&#x27;,
                                               LogisticRegression())]),
-                   param_distributions={&#x27;logisticregression__C&#x27;: &lt;scipy.stats._distn_infrastructure.rv_continuous_frozen object at 0x7f72ea3d74d0&gt;,
+                   param_distributions={&#x27;logisticregression__C&#x27;: &lt;scipy.stats._distn_infrastructure.rv_continuous_frozen object at 0x7f8e67c834d0&gt;,
                                         &#x27;simpleimputer__strategy&#x27;: [&#x27;mean&#x27;,
                                                                     &#x27;median&#x27;,
                                                                     &#x27;most_frequent&#x27;]},
@@ -3768,7 +3768,7 @@ a.param-doc-link::before {
             param_distributions: dict or list of dicts<br><br>Dictionary with parameters names (`str`) as keys and distributions<br>or lists of parameters to try. Distributions must provide a ``rvs``<br>method for sampling (such as those from scipy.stats.distributions).<br>If a list is given, it is sampled uniformly.<br>If a list of dicts is given, first a dict is sampled uniformly, and<br>then a parameter is sampled using that dict as above.</span>
         </a>
     </td>
-            <td class="value">{&#x27;logisticregression__C&#x27;: &lt;scipy.stats....x7f72ea3d74d0&gt;, &#x27;simpleimputer__strategy&#x27;: [&#x27;mean&#x27;, &#x27;median&#x27;, ...]}</td>
+            <td class="value">{&#x27;logisticregression__C&#x27;: &lt;scipy.stats....x7f8e67c834d0&gt;, &#x27;simpleimputer__strategy&#x27;: [&#x27;mean&#x27;, &#x27;median&#x27;, ...]}</td>
         </tr>
     
 
@@ -5345,36 +5345,36 @@ forceTheme('sk-container-id-2');</script></body></div></div>
   <tbody>
     <tr>
       <th>0</th>
-      <td>2.310505</td>
-      <td>0.014829</td>
+      <td>1.277991</td>
+      <td>0.008080</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>0.913043</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2.229534</td>
-      <td>0.015072</td>
+      <td>1.188290</td>
+      <td>0.007955</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>0.826087</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2.228743</td>
-      <td>0.015061</td>
+      <td>1.187227</td>
+      <td>0.007986</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>0.884058</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>2.218502</td>
-      <td>0.014865</td>
+      <td>1.181762</td>
+      <td>0.007812</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>0.913043</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>2.217475</td>
-      <td>0.014728</td>
+      <td>1.184051</td>
+      <td>0.007933</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>0.750000</td>
     </tr>
@@ -5417,9 +5417,7 @@ is a smaller log loss.</p>
     <span class="n">scoring</span><span class="o">=</span><span class="s2">"neg_log_loss"</span><span class="p">,</span>
     <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="n">cv_results</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span>
-    <span class="n">tuned_model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s2">"neg_log_loss"</span><span class="p">,</span> <span class="n">return_estimator</span><span class="o">=</span><span class="kc">True</span>
-<span class="p">)</span>
+<span class="n">cv_results</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span><span class="n">tuned_model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s2">"neg_log_loss"</span><span class="p">,</span> <span class="n">return_estimator</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">cv_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">cv_results</span><span class="p">)</span>
 <span class="n">cv_results</span>
 </pre></div>
@@ -5453,36 +5451,36 @@ is a smaller log loss.</p>
   <tbody>
     <tr>
       <th>0</th>
-      <td>2.303019</td>
-      <td>0.016076</td>
+      <td>1.247249</td>
+      <td>0.008963</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>-0.175685</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2.301501</td>
-      <td>0.016641</td>
+      <td>1.233608</td>
+      <td>0.008949</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>-0.296313</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2.395896</td>
-      <td>0.016448</td>
+      <td>1.309897</td>
+      <td>0.008790</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>-0.202089</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>2.312712</td>
-      <td>0.016299</td>
+      <td>1.226713</td>
+      <td>0.008792</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>-0.194792</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>2.312200</td>
-      <td>0.016476</td>
+      <td>1.227824</td>
+      <td>0.008901</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>-0.431597</td>
     </tr>
