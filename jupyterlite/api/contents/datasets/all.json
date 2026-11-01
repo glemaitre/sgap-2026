@@ -2,11 +2,11 @@
   "content": [
     {
       "content": null,
-      "created": "2026-11-01T20:24:13.218546Z",
+      "created": "2026-11-01T21:01:47.282395Z",
       "format": null,
       "hash": null,
       "hash_algorithm": null,
-      "last_modified": "2026-11-01T20:22:40.052047Z",
+      "last_modified": "2026-11-01T21:00:17.724028Z",
       "mimetype": "text/csv",
       "name": "penguins_regression.csv",
       "path": "datasets/penguins_regression.csv",
@@ -16,11 +16,11 @@
     },
     {
       "content": null,
-      "created": "2026-11-01T20:24:13.218206Z",
+      "created": "2026-11-01T21:01:47.282025Z",
       "format": null,
       "hash": null,
       "hash_algorithm": null,
-      "last_modified": "2026-11-01T20:22:40.051871Z",
+      "last_modified": "2026-11-01T21:00:17.723847Z",
       "mimetype": "text/csv",
       "name": "penguins.csv",
       "path": "datasets/penguins.csv",
@@ -29,11 +29,11 @@
       "writable": true
     }
   ],
-  "created": "2026-11-01T20:24:13.218546Z",
+  "created": "2026-11-01T21:01:47.282395Z",
   "format": "json",
   "hash": null,
   "hash_algorithm": null,
-  "last_modified": "2026-11-01T20:24:13.218546Z",
+  "last_modified": "2026-11-01T21:01:47.282395Z",
   "mimetype": null,
   "name": "datasets",
   "path": "datasets",
