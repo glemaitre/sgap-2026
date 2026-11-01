@@ -8,13 +8,17 @@ Explore the tephra data in `data/` and build a machine learning model.
 Explore the tephra data in data/ and build a machine learning model.
 ```
 
-A Codespace already has Pi, the `pi-skore` extension, skore, and the skills. From this directory, run:
+A Codespace already has Pi, the `pi-skore` extension, skore, and the skills. Container setup removes any saved OpenRouter login, trusts this repository, and starts Pi on DeepSeek V4.1 Flash 1017.
+
+The lecture key is shared separately. It is not stored in this repository. From this directory, save it and start Pi:
 
 ```bash
+./configure-key.sh
+set -a && source .env && set +a
 pi
 ```
 
-The lecture OpenRouter key is in `.env` and is already exported in the Codespace. Container setup removes any saved OpenRouter login, so Pi uses that key, trusts this repository, and starts on DeepSeek V4.1 Flash 1017.
+`./configure-key.sh` writes `.env`. A new Codespace terminal loads that file on its own.
 
 ## Install the skills yourself
 
@@ -44,12 +48,13 @@ Install Pi from any directory, then run the remaining commands from this directo
 ```bash
 curl -fsSL https://pi.dev/install.sh | sh
 pi install npm:@probabl/pi-skore
+./configure-key.sh
 set -a && source .env && set +a
 skore skills install all --agent pi
 pi
 ```
 
-`source .env` loads the lecture OpenRouter key. Pi reads `OPENROUTER_API_KEY` and does not ask you to log in. It starts on DeepSeek V4.1 Flash 1017. The first launch asks you to trust this folder before it loads `.pi/settings.json`.
+`./configure-key.sh` saves the shared lecture key in `.env`. Pi reads `OPENROUTER_API_KEY` and does not ask you to log in. It starts on DeepSeek V4.1 Flash 1017. The first launch asks you to trust this folder before it loads `.pi/settings.json`.
 
 ### Another harness
 

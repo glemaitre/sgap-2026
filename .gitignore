@@ -60,6 +60,9 @@ book/_build
 jupyterlite/.jupyterlite.doit.db
 jupyterlite/dist
 
+# Local secrets
+.env
+
 # Installed agent skills and local agent state
 .agents/
 **/.pi/**

@@ -92,4 +92,4 @@ The hands-on agent session is in [`sessions/agentic-ml`](sessions/agentic-ml). I
 
 ## GitHub Codespaces
 
-Creating a codespace installs the Pixi environment, generates the notebooks, and installs the agentic-session skills. The agentic session README opens in the editor. From `sessions/agentic-ml`, run `pi`.
+Creating a codespace installs the Pixi environment, generates the notebooks, and installs the agentic-session skills. The agentic session README opens in the editor. From `sessions/agentic-ml`, save the shared lecture key with `./configure-key.sh`, then run `pi`.
