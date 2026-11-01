@@ -50,7 +50,7 @@ hist_gradient_boosting = HistGradientBoostingClassifier(categorical_features="fr
 
 # %% [markdown]
 #
-# In the previous notebook, we used the `cross_validate` function to evaluate the
+# In the previous notebook, we used the {py:func}`~sklearn.model_selection.cross_validate` function to evaluate the
 # performance of the model.
 
 # %%
@@ -77,7 +77,7 @@ y.value_counts(normalize=True)
 # cross-validation, we should keep this in mind.
 #
 # There are also other metrics that we could use to evaluate the performance of
-# a classifier. To check these metrics, we can check the `classification_report`
+# a classifier. To check these metrics, we can check the {py:func}`~sklearn.metrics.classification_report`
 # function.
 
 # %%
@@ -107,12 +107,12 @@ _ = display.ax_.set(
 
 # %% [markdown]
 #
-# An important point to notice is that we used the method `predict` to compute these
+# An important point to notice is that we used the method {py:meth}`~sklearn.ensemble.HistGradientBoostingClassifier.predict` to compute these
 # metrics. However, when dealing with classification, we could use the probabilistic
 # properties of our classifier. Here, we will illustrate the probability outputs
 # provided by the classifier and how those are transformed into a class.
 #
-# The method `predict_proba` provides the probabilities of each class.
+# The method {py:meth}`~sklearn.ensemble.HistGradientBoostingClassifier.predict_proba` provides the probabilities of each class.
 
 # %%
 y_pred = hist_gradient_boosting.predict_proba(X_test)
@@ -127,7 +127,7 @@ y_pred.sum(axis=1)
 
 # %% [markdown]
 #
-# The method `predict` uses a threshold of 0.5 to convert the probabilities into
+# The method {py:meth}`~sklearn.ensemble.HistGradientBoostingClassifier.predict` uses a threshold of 0.5 to convert the probabilities into
 # classes. This could be done by taking the `argmax` of the probabilities.
 
 # %%
@@ -179,7 +179,7 @@ _ = display.ax_.set(xlabel="Recall", ylabel="Precision", title="Precision-Recall
 # %% [markdown]
 #
 # But we could try any other threshold and observe that we are moving on this curve.
-# We use the `FixedThresholdClassifier` by setting the threshold to 0.1.
+# We use the {py:class}`~sklearn.model_selection.FixedThresholdClassifier` by setting the threshold to 0.1.
 
 # %%
 from sklearn.model_selection import FixedThresholdClassifier
@@ -214,7 +214,7 @@ _ = display.ax_.set(xlabel="False Positive Rate", ylabel="True Positive Rate", t
 #
 # However, we don't evaluate whether the probability estimates of the classifier are
 # precise, also known as well calibrated. We can check the calibration of a classifier
-# using the `CalibrationDisplay`. This is also known as a reliability diagram.
+# using the {py:class}`~sklearn.calibration.CalibrationDisplay`. This is also known as a reliability diagram.
 
 # %%
 from sklearn.calibration import CalibrationDisplay
@@ -288,15 +288,15 @@ print(f"Brier score of the LogisticRegression: {brier_score_rf:.2f}")
 # %% [markdown]
 #
 # We observed that the log loss and the Brier score are lower for the
-# `HistGradientBoostingClassifier` than for the `LogisticRegression`.
+# {py:class}`~sklearn.ensemble.HistGradientBoostingClassifier` than for the {py:class}`~sklearn.linear_model.LogisticRegression`.
 #
 # # Bonus section
 #
 # We will do this part if we have time. In the previous section, we saw that the
-# `FixedThresholdClassifier` is a way to change the threshold of the classifier.
+# {py:class}`~sklearn.model_selection.FixedThresholdClassifier` is a way to change the threshold of the classifier.
 # However, we might want to find the best threshold that maximizes a metric.
 #
-# This is the job of the `TunedThresholdClassifierCV`.
+# This is the job of the {py:class}`~sklearn.model_selection.TunedThresholdClassifierCV`.
 
 # %%
 display = PrecisionRecallDisplay.from_estimator(hist_gradient_boosting, X_test, y_test)

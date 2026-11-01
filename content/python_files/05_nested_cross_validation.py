@@ -5,8 +5,8 @@
 # In this notebook, we will illustrate how to perform hyperparameter tuning
 # using nested cross-validation.
 #
-# We start by defining the predictive model that we created in the previous
-# notebook.
+# We start by defining the predictive model from the previous notebook with
+# {py:func}`~skrub.tabular_pipeline`.
 
 # %% [markdown]
 #
@@ -68,7 +68,8 @@ logistic_regression.get_params()
 
 # %% [markdown]
 #
-# We can tune these hyperparameters using a search strategy.
+# We can tune these hyperparameters with
+# {py:class}`~sklearn.model_selection.RandomizedSearchCV`.
 
 # %%
 from scipy.stats import loguniform

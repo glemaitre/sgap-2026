@@ -74,7 +74,7 @@ linear_regression.fit(X, y)
 
 # %% [markdown]
 #
-# In scikit-learn, the method `fit` is used to train a model. In this case, it allows us
+# In scikit-learn, the method {py:meth}`~sklearn.linear_model.LinearRegression.fit` is used to train a model. In this case, it allows us
 # to find the best parameters of the linear regression model to fit the data. These
 # parameters are stored in the attributes `coef_` and `intercept_` of the instance.
 
@@ -95,7 +95,7 @@ y_pred = linear_regression.predict(X_to_infer)
 
 # %% [markdown]
 #
-# The method `predict` allows us to get the prediction of the model on new data. Now,
+# The method {py:meth}`~sklearn.linear_model.LinearRegression.predict` allows us to get the prediction of the model on new data. Now,
 # we plot the obtained values.
 
 # %%
@@ -106,7 +106,7 @@ _ = ax.legend()
 
 # %% [markdown]
 #
-# This `LinearRegression` model minimizes the residual sum of squares, which is the
+# This {py:class}`~sklearn.linear_model.LinearRegression` model minimizes the residual sum of squares, which is the
 # mean squared error up to a constant factor. The scikit-learn user guide presents this
 # estimator as
 # [ordinary least squares](https://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares).
@@ -125,17 +125,17 @@ print(f"The mean squared error is: {error:.2f}")
 #
 # ### Exercise
 #
-# `LinearRegression` estimates the conditional mean. Another linear model,
-# `QuantileRegressor`, estimates a conditional quantile. The documentation is in the
+# {py:class}`~sklearn.linear_model.LinearRegression` estimates the conditional mean. Another linear model,
+# {py:class}`~sklearn.linear_model.QuantileRegressor`, estimates a conditional quantile. The documentation is in the
 # user guide on
 # [quantile regression](https://scikit-learn.org/stable/modules/linear_model.html#quantile-regression)
 # and in the
-# [`QuantileRegressor` docstring](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.QuantileRegressor.html).
+# {py:class}`~sklearn.linear_model.QuantileRegressor` docstring.
 #
 # The model minimizes the pinball loss. With `quantile=0.5`, the target is the
 # conditional median, and the loss matches the median absolute error. Set `alpha=0`:
 # the default value adds an L1 penalty and would confound the comparison with
-# `LinearRegression`.
+# {py:class}`~sklearn.linear_model.LinearRegression`.
 #
 # Fit this median model on the same data. Plot its predictions on the same figure as
 # the linear regression. Compute the mean squared error and the median absolute error
@@ -151,7 +151,7 @@ print(f"The mean squared error is: {error:.2f}")
 # Up to now, we have evaluated the models on the same dataset used to fit them. This
 # does not tell us how well they generalize to new data.
 #
-# We set aside a testing set with `train_test_split`. The training set is used to
+# We set aside a testing set with {py:func}`~sklearn.model_selection.train_test_split`. The training set is used to
 # create the model, and the testing set is used to evaluate it on unseen data.
 
 # %%
@@ -164,7 +164,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
 # %% [markdown]
 #
 # We fit the linear model and the median model. The median model is a
-# `QuantileRegressor` with `quantile=0.5` and `alpha=0`, as in the exercise. We compare
+# {py:class}`~sklearn.linear_model.QuantileRegressor` with `quantile=0.5` and `alpha=0`, as in the exercise. We compare
 # them with the median absolute error on the testing set.
 
 # %%
@@ -194,15 +194,16 @@ print(
 # Repeat the train-test evaluation of the linear model for several seeds, and plot the
 # distribution of the test error.
 #
-# Use a `for` loop over `range`. At each seed, call `train_test_split` with
+# Use a `for` loop over `range`. At each seed, call {py:func}`~sklearn.model_selection.train_test_split` with
 # `random_state=seed`, fit the linear model, and append the median absolute error on
-# the test set to a list. Plot that list with `pandas.Series.plot.hist`.
+# the test set to a list. Plot that list with {py:meth}`pandas.Series.plot.hist`.
 
 # %%
 
 # %% [markdown]
 #
-# Doing this repetition by hand is tedious. `cross_validate` repeats the split for us
+# Doing this repetition by hand is tedious. {py:func}`~sklearn.model_selection.cross_validate`,
+# with a {py:class}`~sklearn.model_selection.KFold` splitter, repeats the split for us
 # and stores the results in a Python dictionary.
 #
 # We do not pass a scorer. For a regressor, the default score is the R² coefficient:
@@ -228,7 +229,7 @@ cv_results[["train_score", "test_score"]].describe()
 
 # %% [markdown]
 #
-# `skore.evaluate` runs the same kind of evaluation and reports the metrics directly.
+# {py:func}`skore.evaluate` runs the same kind of evaluation and reports the metrics directly.
 # The mean absolute error is available under the name `mean_absolute_error`, with no
 # `neg_` prefix.
 
