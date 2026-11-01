@@ -53,6 +53,7 @@ y = df[target_name]
 # using a single split.
 
 # %%
+from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
@@ -64,9 +65,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
 # - List every problem you can think of with fitting a model on this training data as
 #   it is.
 # - Fit a `LogisticRegression` model on the training data.
-
-# %%
-from sklearn.linear_model import LogisticRegression
 
 # %%
 #
@@ -108,7 +106,10 @@ X_numeric = X.select_dtypes(include="number")
 
 # %%
 logistic_regression = LogisticRegression()
-logistic_regression.fit(X_numeric, y)
+try:
+    logistic_regression.fit(X_numeric, y)
+except ValueError as error:
+    print(error)
 
 # %% [markdown]
 #
@@ -187,9 +188,7 @@ logistic_regression[-1].n_iter_
 # %%
 from sklearn.preprocessing import StandardScaler
 
-logistic_regression = make_pipeline(
-    StandardScaler(), SimpleImputer(), LogisticRegression()
-)
+logistic_regression = make_pipeline(StandardScaler(), SimpleImputer(), LogisticRegression())
 logistic_regression.fit(X_numeric, y)
 
 # %%

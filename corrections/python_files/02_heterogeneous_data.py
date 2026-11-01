@@ -58,7 +58,10 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
 from sklearn.linear_model import LogisticRegression
 
 logistic_regression = LogisticRegression()
-logistic_regression.fit(X_train, y_train)
+try:
+    logistic_regression.fit(X_train, y_train)
+except ValueError as error:
+    print(error)
 
 # %% [markdown]
 #
@@ -96,7 +99,10 @@ X_numeric = X.select_dtypes(include="number")
 
 # %%
 logistic_regression = LogisticRegression()
-logistic_regression.fit(X_numeric, y)
+try:
+    logistic_regression.fit(X_numeric, y)
+except ValueError as error:
+    print(error)
 
 # %% [markdown]
 #
@@ -175,9 +181,7 @@ logistic_regression[-1].n_iter_
 # %%
 from sklearn.preprocessing import StandardScaler
 
-logistic_regression = make_pipeline(
-    StandardScaler(), SimpleImputer(), LogisticRegression()
-)
+logistic_regression = make_pipeline(StandardScaler(), SimpleImputer(), LogisticRegression())
 logistic_regression.fit(X_numeric, y)
 
 # %%
