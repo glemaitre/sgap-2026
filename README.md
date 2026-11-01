@@ -1,6 +1,6 @@
 # SGAP 2026
 
-Course on model evaluation and validation with scikit-learn and skrub.
+Course on model evaluation and validation with scikit-learn and skrub, plus an agentic machine learning session.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/glemaitre/sgap-2026?quickstart=1)
 
@@ -86,6 +86,10 @@ or:
 python utils/convert_to_notebooks.py --source corrections/python_files --output corrections/notebooks
 ```
 
+## Agentic machine learning
+
+The hands-on agent session is in [`sessions/agentic-ml`](sessions/agentic-ml). It uses the tephra tables in `data/` and the Pi harness. A Codespace already installs Pi, the `pi-skore` extension, and the skore skills. Instructions for a local harness are in that session's README.
+
 ## GitHub Codespaces
 
-Creating a codespace installs the Pixi environment, generates the notebooks, and starts JupyterLab on port 8888. The first notebook opens in the editor.
+Creating a codespace installs the Pixi environment, generates the notebooks, installs the agentic-session skills, and starts JupyterLab on port 8888. The agentic session README opens in the editor. From `sessions/agentic-ml`, run `pi`.

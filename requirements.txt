@@ -4,6 +4,7 @@ ipykernel
 jupytext>=1.17.2,<2
 scikit-learn~=1.9.1
 skrub~=0.11.0
+skore~=0.29.0
 pandas
 matplotlib
 numpy

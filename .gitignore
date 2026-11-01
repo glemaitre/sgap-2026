@@ -59,3 +59,8 @@ book/_build
 # jupyterlite build
 jupyterlite/.jupyterlite.doit.db
 jupyterlite/dist
+
+# Installed agent skills and local agent state
+.agents/
+.pi/
+.skore/
