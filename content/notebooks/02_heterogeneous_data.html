@@ -698,7 +698,7 @@ numerical and categorical features.</p>
 </div>
 </div>
 </div>
-<p>Before to evaluate model through cross-validation, we will first look at model
+<p>Before evaluating a model through cross-validation, we will first look at a model
 using a single split.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -4455,8 +4455,8 @@ mentioned that we could try to scale the data. Let’s try to scale the data usi
 </section>
 <section id="id2">
 <h3>Exercise<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
-<p>Think of a way to transform the string category into numerical data.
-Come with your own transform and evaluate the model using cross-validation.</p>
+<p>Think of a way to transform the string categories into numerical data.
+Come up with your own transform and evaluate the model using cross-validation.</p>
 <p>We need to find a strategy to “encode” the categorical data into numerical data. The
 simplest strategy is to use an ordinal encoding.</p>
 <div class="cell docutils container">
@@ -4565,7 +4565,7 @@ simplest strategy is to use an ordinal encoding.</p>
 <p>344 rows × 3 columns</p>
 </div></div></div>
 </div>
-<p>It replace a category by an integer. However, with linear models, it means that we
+<p>It replaces a category by an integer. However, with linear models, it means that we
 would assume that the difference between two categories is the same. Also, there is
 an ordering imposed by this transformation.</p>
 <p>If this modelling assumption is not desired, we can use a one-hot encoding.</p>
@@ -4854,7 +4854,7 @@ ValueError: Found unknown categories ['.'] in column 2 during transform
 </table>
 </div></div></div>
 </div>
-<p>We get an error for one of the split. This is due to the fact that some categories are
+<p>We get an error for one of the splits. This is due to the fact that some categories are
 not present in the test set. We can handle this issue by ignoring the unknown
 categories. This is given by a parameter in the <code class="docutils literal notranslate"><span class="pre">OneHotEncoder</span></code>.</p>
 <div class="cell docutils container">
@@ -6420,7 +6420,7 @@ forceTheme('sk-container-id-3');</script></body></div></div>
 </div>
 <p>Now, we need to combine both numerical and categorical preprocessing and feed the
 output to a single linear model. The <code class="docutils literal notranslate"><span class="pre">ColumnTransformer</span></code> class is designed for this
-purpose: we provide a list of columns such that it will be transformed by a specific
+purpose: we provide a list of columns so that they are transformed by a specific
 transformer (or a pipeline of transformers). This <code class="docutils literal notranslate"><span class="pre">ColumnTransformer</span></code> can be used as
 a preprocessing stage of a pipeline containing a linear model as the final stage.</p>
 <div class="cell docutils container">
@@ -7168,10 +7168,10 @@ a.param-doc-link::before {
                                                                    StandardScaler()),
                                                                   (&#x27;simpleimputer&#x27;,
                                                                    SimpleImputer())]),
-                                                  &lt;sklearn.compose._column_transformer.make_column_selector object at 0x7f94472c8550&gt;),
+                                                  &lt;sklearn.compose._column_transformer.make_column_selector object at 0x7f7b2606c550&gt;),
                                                  (&#x27;onehotencoder&#x27;,
                                                   OneHotEncoder(handle_unknown=&#x27;ignore&#x27;),
-                                                  &lt;sklearn.compose._column_transformer.make_column_selector object at 0x7f94472c8a50&gt;)])),
+                                                  &lt;sklearn.compose._column_transformer.make_column_selector object at 0x7f7b2606ca50&gt;)])),
                 (&#x27;logisticregression&#x27;, LogisticRegression())])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-10" type="checkbox" ><label for="sk-estimator-id-10" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>Pipeline</div></div><div><a class="sk-estimator-doc-link " rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.pipeline.Pipeline.html">?<span>Documentation for Pipeline</span></a><span class="sk-estimator-doc-link ">i<span>Not fitted</span></span></div></label><div class="sk-toggleable__content " data-param-prefix="">
         <div class="estimator-table">
             <details>
@@ -7412,7 +7412,7 @@ a.param-doc-link::before {
                 </table>
             </details>
         </div>
-    </div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-12" type="checkbox" ><label for="sk-estimator-id-12" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>pipeline</div></div></label><div class="sk-toggleable__content " data-param-prefix="columntransformer__pipeline__"><pre>&lt;sklearn.compose._column_transformer.make_column_selector object at 0x7f94472c8550&gt;</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-13" type="checkbox" ><label for="sk-estimator-id-13" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>StandardScaler</div></div><div><a class="sk-estimator-doc-link " rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></div></label><div class="sk-toggleable__content " data-param-prefix="columntransformer__pipeline__standardscaler__">
+    </div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-12" type="checkbox" ><label for="sk-estimator-id-12" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>pipeline</div></div></label><div class="sk-toggleable__content " data-param-prefix="columntransformer__pipeline__"><pre>&lt;sklearn.compose._column_transformer.make_column_selector object at 0x7f7b2606c550&gt;</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-13" type="checkbox" ><label for="sk-estimator-id-13" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>StandardScaler</div></div><div><a class="sk-estimator-doc-link " rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></div></label><div class="sk-toggleable__content " data-param-prefix="columntransformer__pipeline__standardscaler__">
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
@@ -7612,7 +7612,7 @@ a.param-doc-link::before {
                 </table>
             </details>
         </div>
-    </div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-15" type="checkbox" ><label for="sk-estimator-id-15" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>onehotencoder</div></div></label><div class="sk-toggleable__content " data-param-prefix="columntransformer__onehotencoder__"><pre>&lt;sklearn.compose._column_transformer.make_column_selector object at 0x7f94472c8a50&gt;</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-16" type="checkbox" ><label for="sk-estimator-id-16" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>OneHotEncoder</div></div><div><a class="sk-estimator-doc-link " rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.preprocessing.OneHotEncoder.html">?<span>Documentation for OneHotEncoder</span></a></div></label><div class="sk-toggleable__content " data-param-prefix="columntransformer__onehotencoder__">
+    </div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-15" type="checkbox" ><label for="sk-estimator-id-15" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>onehotencoder</div></div></label><div class="sk-toggleable__content " data-param-prefix="columntransformer__onehotencoder__"><pre>&lt;sklearn.compose._column_transformer.make_column_selector object at 0x7f7b2606ca50&gt;</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-16" type="checkbox" ><label for="sk-estimator-id-16" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>OneHotEncoder</div></div><div><a class="sk-estimator-doc-link " rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.preprocessing.OneHotEncoder.html">?<span>Documentation for OneHotEncoder</span></a></div></label><div class="sk-toggleable__content " data-param-prefix="columntransformer__onehotencoder__">
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
@@ -8280,71 +8280,71 @@ forceTheme('sk-container-id-4');</script></body></div></div>
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.015376</td>
-      <td>0.005249</td>
+      <td>0.015226</td>
+      <td>0.005340</td>
       <td>1.000000</td>
       <td>0.996764</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.014446</td>
-      <td>0.004971</td>
+      <td>0.013271</td>
+      <td>0.005033</td>
       <td>1.000000</td>
       <td>1.000000</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.013893</td>
-      <td>0.005081</td>
+      <td>0.013512</td>
+      <td>0.005097</td>
       <td>1.000000</td>
       <td>1.000000</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0.013336</td>
-      <td>0.005040</td>
+      <td>0.013458</td>
+      <td>0.005091</td>
       <td>1.000000</td>
       <td>0.996764</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.012867</td>
-      <td>0.004935</td>
+      <td>0.013051</td>
+      <td>0.004919</td>
       <td>0.970588</td>
       <td>1.000000</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>0.012778</td>
-      <td>0.004959</td>
+      <td>0.012949</td>
+      <td>0.005053</td>
       <td>1.000000</td>
       <td>0.996774</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>0.013640</td>
-      <td>0.005028</td>
+      <td>0.013934</td>
+      <td>0.004895</td>
       <td>1.000000</td>
       <td>0.996774</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>0.013082</td>
-      <td>0.004795</td>
+      <td>0.013184</td>
+      <td>0.004929</td>
       <td>1.000000</td>
       <td>0.996774</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>0.013561</td>
-      <td>0.004941</td>
+      <td>0.013835</td>
+      <td>0.005007</td>
       <td>1.000000</td>
       <td>0.996774</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>0.012875</td>
-      <td>0.004961</td>
+      <td>0.013191</td>
+      <td>0.005083</td>
       <td>0.970588</td>
       <td>1.000000</td>
     </tr>
@@ -8352,7 +8352,7 @@ forceTheme('sk-container-id-4');</script></body></div></div>
 </table>
 </div></div></div>
 </div>
-<p>We gave basic preprocessing steps for linear model. However, there is another group
+<p>We gave basic preprocessing steps for a linear model. However, there is another group
 of models that can handle heterogeneous data: tree-based models.</p>
 </section>
 <section id="id3">

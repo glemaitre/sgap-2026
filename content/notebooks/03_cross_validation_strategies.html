@@ -381,10 +381,10 @@
   <section class="tex2jax_ignore mathjax_ignore" id="cross-validation-strategies">
 <h1>Cross-validation strategies<a class="headerlink" href="#cross-validation-strategies" title="Link to this heading">#</a></h1>
 <p>The previous notebooks introduced how to evaluate a model and how to create a
-specific preprocessing pipeline depending of the last model.</p>
-<p>In this notebook, we will check a bit more some details regarding the cross-validation
-strategies and some of the pitfalls that we can encounter.</p>
-<p>Let’s take iris dataset and evaluate a logistic regression model.</p>
+specific preprocessing pipeline depending on the last model.</p>
+<p>In this notebook, we will look more closely at some details of the cross-validation
+strategies and at some of the pitfalls that we can encounter.</p>
+<p>Let’s take the iris dataset and evaluate a logistic regression model.</p>
 <section id="environment-setup">
 <h2>Environment setup<a class="headerlink" href="#environment-setup" title="Link to this heading">#</a></h2>
 <p>Run this cell in JupyterLite. A local installation already provides these packages.</p>
@@ -1893,7 +1893,7 @@ forceTheme('sk-container-id-1');</script></body></div></div>
 <h3>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
 <p>Evaluate the previous <code class="docutils literal notranslate"><span class="pre">LogisticRegression</span></code> model using a 3-fold cross-validation
 (i.e. <code class="docutils literal notranslate"><span class="pre">sklearn.model_selection.KFold</span></code>). What do you observe?</p>
-<p>We observe that the training score is always zero that is really surprising. We can
+<p>We observe that the training score is always zero, which is really surprising. We can
 check the target to understand why.</p>
 <p>We can use a <code class="docutils literal notranslate"><span class="pre">StratifiedKFold</span></code> object to ensure that the class distribution is
 preserved in each fold. A side effect will be that all classes will be present in the
@@ -2164,7 +2164,7 @@ Name: proportion, dtype: float64
 </div>
 </div>
 <p>Now, let’s check the documentation of the <code class="docutils literal notranslate"><span class="pre">cross_validate</span></code> function to see if this
-function was already providing a way to stratify the data.</p>
+function already provides a way to stratify the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">cross_validate</span><span class="p">)</span>
@@ -2417,21 +2417,21 @@ data.</p>
 </section>
 <section id="id1">
 <h3>Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
-<p>Make an evaluation and compare 2 different strategies:</p>
+<p>Evaluate the model and compare two strategies:</p>
 <ul class="simple">
 <li><p>using a <code class="docutils literal notranslate"><span class="pre">KFold</span></code> object with 13 splits without shuffling the data;</p></li>
 <li><p>using a <code class="docutils literal notranslate"><span class="pre">KFold</span></code> object with 13 splits with shuffling the data.</p></li>
 </ul>
 <p>What do you observe? What are the causes of the differences?</p>
-<p>Here, we provide a <code class="docutils literal notranslate"><span class="pre">groups</span></code> array that mentioned the writer ID for each sample.</p>
+<p>Here, we provide a <code class="docutils literal notranslate"><span class="pre">groups</span></code> array that gives the writer ID for each sample.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">count</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="c1"># defines the lower and upper bounds of sample indices</span>
-<span class="c1"># for each writer</span>
+<span class="c1"># Define the lower and upper bounds of sample indices</span>
+<span class="c1"># for each writer.</span>
 <span class="n">writer_boundaries</span> <span class="o">=</span> <span class="p">[</span>
     <span class="mi">0</span><span class="p">,</span>
     <span class="mi">130</span><span class="p">,</span>
@@ -2468,12 +2468,12 @@ data.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">writer_boundaries</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Target index"</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Writer index"</span><span class="p">)</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Underlying writer groups existing in the target"</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Underlying writer groups present in the target"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/c6739e91a09a3d98dff3b718c43972a632a9d6d004c688664f41cd88446af3a0.png" src="../../_images/c6739e91a09a3d98dff3b718c43972a632a9d6d004c688664f41cd88446af3a0.png" />
+<img alt="../../_images/27f1cfde1a98a98ee55cd5e43fbba393ee7b05ecbafba16b67e3b42cd2a82e2e.png" src="../../_images/27f1cfde1a98a98ee55cd5e43fbba393ee7b05ecbafba16b67e3b42cd2a82e2e.png" />
 </div>
 </div>
 <p>We can use this information to properly evaluate our model. We need to use the

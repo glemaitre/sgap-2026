@@ -700,7 +700,7 @@ notebook.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2774/4149670560.py:13: Pandas4Warning: For backward compatibility, 'str' dtypes are included by select_dtypes when 'object' dtype is specified. This behavior is deprecated and will be removed in a future version. Explicitly pass 'str' to `include` to select them, or to `exclude` to remove them and silence this warning.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2839/4149670560.py:13: Pandas4Warning: For backward compatibility, 'str' dtypes are included by select_dtypes when 'object' dtype is specified. This behavior is deprecated and will be removed in a future version. Explicitly pass 'str' to `include` to select them, or to `exclude` to remove them and silence this warning.
 See https://pandas.pydata.org/docs/dev/user_guide/migration.html#string-migration-select-dtypes for details on how to write code that works with pandas 2 and 3.
   categorical_columns = X.select_dtypes(include="object").columns
 </pre></div>
@@ -730,7 +730,7 @@ only two classes.</p>
 </div>
 </div>
 </div>
-<p>We used in the previous notebook the <code class="docutils literal notranslate"><span class="pre">cross_validate</span></code> function to evaluate the
+<p>In the previous notebook, we used the <code class="docutils literal notranslate"><span class="pre">cross_validate</span></code> function to evaluate the
 performance of the model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -798,7 +798,7 @@ performance of the model.</p>
 </div>
 <p>The score used by default in this case is the accuracy. However, accuracy is not
 always the best metric to evaluate the performance of a classifier. It is actually
-an issue with imbalanced datasets. We can check the ratio of the class on our dataset.</p>
+an issue with imbalanced datasets. We can check the ratio of each class in our dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -814,10 +814,10 @@ Name: proportion, dtype: float64
 </div>
 </div>
 </div>
-<p>So we already see if we predict always the majority class, we will get an accuracy of
-around 0.7. Therefore, when interpreting the accuracy obtained from the
+<p>So we already see that if we always predict the majority class, we will get an
+accuracy of around 0.7. Therefore, when interpreting the accuracy obtained from the
 cross-validation, we should keep this in mind.</p>
-<p>Otherwise, we have some other metrics that we could use to evaluate the performance of
+<p>There are also other metrics that we could use to evaluate the performance of
 a classifier. To check these metrics, we can check the <code class="docutils literal notranslate"><span class="pre">classification_report</span></code>
 function.</p>
 <div class="cell docutils container">
@@ -867,8 +867,8 @@ the following confusion matrix:</p>
 </div>
 <p>An important point to notice is that we used the method <code class="docutils literal notranslate"><span class="pre">predict</span></code> to compute these
 metrics. However, when dealing with classification, we could use the probabilistic
-properties of our classifier. Here, we will illustrate what are the probabilities
-output provided by the classifier and how those are transformed into a class.</p>
+properties of our classifier. Here, we will illustrate the probability outputs
+provided by the classifier and how those are transformed into a class.</p>
 <p>The method <code class="docutils literal notranslate"><span class="pre">predict_proba</span></code> provides the probabilities of each class.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -933,13 +933,13 @@ output provided by the classifier and how those are transformed into a class.</p
 <section id="exercise">
 <h3>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
 <p>Try to find the relationship to go from the probabilities to the classes, or
-in other word to go from the output of <code class="docutils literal notranslate"><span class="pre">predict_proba</span></code> to the output of <code class="docutils literal notranslate"><span class="pre">predict</span></code>.</p>
+in other words to go from the output of <code class="docutils literal notranslate"><span class="pre">predict_proba</span></code> to the output of <code class="docutils literal notranslate"><span class="pre">predict</span></code>.</p>
 <p>So it means that the threshold of 0.5 is completely arbitrary. We could change this
 threshold and compute the confusion matrix and subsequent metrics. It will therefore
 create a curve.</p>
-<p>In classification, there is two main curves that are known: the ROC curve and the
+<p>In classification, there are two main curves that are known: the ROC curve and the
 precision-recall curve. They usually show some trade-off regarding our classifier.
-Let’s start to look at the precision-recall curve.</p>
+Let’s start by looking at the precision-recall curve.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">PrecisionRecallDisplay</span>
@@ -1011,13 +1011,13 @@ We use the <code class="docutils literal notranslate"><span class="pre">FixedThr
 <h3>Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p>Make the same analysis by plotting the ROC curve. I let you check the documentation
 of scikit-learn to find the right classes to use.</p>
-<p>The usage of these curves are chosen depending on the problem at end and the
+<p>Which of these curves to use depends on the problem at hand and on the
 community.</p>
-<p>One important point concept to understand here is that these curves are evaluating
-the discriminative power of a classifier or in other words the ranking of the
+<p>One important concept to understand here is that these curves evaluate
+the discriminative power of a classifier, or in other words the ranking of the
 predictions.</p>
-<p>However, we don’t evaluate if the probability estimates of the classifier are
-precise as known as well-calibrated. We can check the calibration of a classifier
+<p>However, we don’t evaluate whether the probability estimates of the classifier are
+precise, also known as well calibrated. We can check the calibration of a classifier
 using the <code class="docutils literal notranslate"><span class="pre">CalibrationDisplay</span></code>. This is also known as a reliability diagram.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -4048,7 +4048,7 @@ However, we might want to find the best threshold that maximizes a metric.</p>
 <img alt="../../_images/c4ded1677002b9e45bc4dccf275ef5b3165d7b48b10d161bd83bc681c3a235f1.png" src="../../_images/c4ded1677002b9e45bc4dccf275ef5b3165d7b48b10d161bd83bc681c3a235f1.png" />
 </div>
 </div>
-<p>Let’s find on this curve, which model is maximizing the F1-score.</p>
+<p>Let’s find which model on this curve maximizes the F1-score.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">f1_score</span><span class="p">,</span> <span class="n">make_scorer</span>

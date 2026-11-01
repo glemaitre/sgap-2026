@@ -5,7 +5,7 @@
 # In this notebook, we will illustrate how to perform hyperparameter tuning
 # using nested cross-validation.
 #
-# We start be defining the predictive model that we created in the previous
+# We start by defining the predictive model that we created in the previous
 # notebook.
 
 # %% [markdown]
@@ -95,7 +95,7 @@ cv_results
 
 # %% [markdown]
 #
-# We can check the best estimator that have been for each fold.
+# We can check the best estimator that has been found for each fold.
 
 # %%
 for estimator in cv_results["estimator"]:
@@ -105,8 +105,9 @@ for estimator in cv_results["estimator"]:
 #
 # However, the previous approach is not the best way to tune hyperparameters.
 # We used the default score that is the accuracy here. However, if we have a
-# probabilistic model, we should instead optimized a proper scoring function instead
-# of a threshold-based metric. So we can optimize the log loss instead of the accuracy.
+# probabilistic model, we should instead optimize a proper scoring function
+# rather than a threshold-based metric. So we can optimize the log loss instead of
+# the accuracy.
 
 # %%
 cv_results = cross_validate(tuned_model, X, y, cv=5, scoring="neg_log_loss", return_estimator=True)
