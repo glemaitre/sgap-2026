@@ -362,7 +362,13 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Exercise</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -703,10 +709,9 @@ using a single split.</p>
 </div>
 </div>
 </div>
-<div class="tip admonition">
-<p class="admonition-title">Exercise</p>
-<p>Fit a <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticRegression</span></code></a> model on the training data.</p>
-</div>
+<section id="exercise">
+<h3>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
+<p>Fit a <code class="docutils literal notranslate"><span class="pre">LogisticRegression</span></code> model on the training data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
@@ -722,15 +727,15 @@ using a single split.</p>
 </div>
 </div>
 </div>
-<div class="tip admonition">
-<p class="admonition-title">Exercise</p>
-<p>Fit a <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticRegression</span></code></a> model on the numerical data.</p>
-</div>
+</section>
+<section id="id1">
+<h3>Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>Fit a <code class="docutils literal notranslate"><span class="pre">LogisticRegression</span></code> model on the numerical data.</p>
 <p>Does it work?</p>
-<p>A scikit-learn <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code></a>, created with
-<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.make_pipeline.html#sklearn.pipeline.make_pipeline" title="(in scikit-learn v1.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_pipeline()</span></code></a>, chains steps and exposes
-<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline.fit" title="(in scikit-learn v1.9)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fit()</span></code></a> and <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline.predict" title="(in scikit-learn v1.9)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">predict()</span></code></a>, like the
-final estimator. We use a <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.impute.SimpleImputer.html#sklearn.impute.SimpleImputer" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleImputer</span></code></a> here to impute
+<p>A scikit-learn <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code>, created with
+<code class="docutils literal notranslate"><span class="pre">make_pipeline</span></code>, chains steps and exposes
+<code class="docutils literal notranslate"><span class="pre">fit</span></code> and <code class="docutils literal notranslate"><span class="pre">predict</span></code>, like the
+final estimator. We use a <code class="docutils literal notranslate"><span class="pre">SimpleImputer</span></code> here to impute
 missing values before the logistic regression.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2474,7 +2479,7 @@ performed.</p>
 </div>
 </div>
 <p>Indeed, we reached the maximum number of iterations. We can increase the number of
-iterations. Let’s check which parameters we can set with the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline.get_params" title="(in scikit-learn v1.9)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_params()</span></code></a> method.</p>
+iterations. Let’s check which parameters we can set with the <code class="docutils literal notranslate"><span class="pre">get_params</span></code> method.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logistic_regression</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span>
@@ -4242,7 +4247,7 @@ forceTheme('sk-container-id-2');</script></body></div></div>
 </div>
 <p>Now, the model converged but it required almost 2,500 iterations. The warning message
 mentioned that we could try to scale the data. Let’s try to scale the data using a
-<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">StandardScaler</span></code></a>. We can then check if the convergence is faster.</p>
+<code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code>. We can then check if the convergence is faster.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
@@ -4260,7 +4265,7 @@ mentioned that we could try to scale the data. Let’s try to scale the data usi
 </div>
 </div>
 <p>It only requires 11 iterations. We can now evaluate the model using cross-validation.</p>
-<p>The imputer is inside the pipeline, so <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_validate.html#sklearn.model_selection.cross_validate" title="(in scikit-learn v1.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">cross_validate()</span></code></a> refits it on each training
+<p>The imputer is inside the pipeline, so <code class="docutils literal notranslate"><span class="pre">cross_validate</span></code> refits it on each training
 fold. Fitting it on the whole dataset before the split would leak information into
 the score.</p>
 <div class="cell docutils container">
@@ -4455,15 +4460,15 @@ the score.</p>
 <p>344 rows × 3 columns</p>
 </div></div></div>
 </div>
-<div class="tip admonition">
-<p class="admonition-title">Exercise</p>
+</section>
+<section id="id2">
+<h3>Exercise<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Think of a way to transform the string categories into numerical data.</p></li>
 <li><p>Come up with your own transform and evaluate the model using cross-validation.</p></li>
 </ul>
-</div>
 <p>We need to find a strategy to “encode” the categorical data into numerical data. The
-simplest strategy is to use an <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OrdinalEncoder.html#sklearn.preprocessing.OrdinalEncoder" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrdinalEncoder</span></code></a>.</p>
+simplest strategy is to use an <code class="docutils literal notranslate"><span class="pre">OrdinalEncoder</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrdinalEncoder</span>
@@ -4861,7 +4866,7 @@ ValueError: Found unknown categories ['.'] in column 2 during transform
 </div>
 <p>We get an error for one of the splits. This is due to the fact that some categories are
 not present in the test set. We can handle this issue by ignoring the unknown
-categories. This is given by a parameter in the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html#sklearn.preprocessing.OneHotEncoder" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OneHotEncoder</span></code></a>.</p>
+categories. This is given by a parameter in the <code class="docutils literal notranslate"><span class="pre">OneHotEncoder</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logistic_regression</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span>
@@ -6424,9 +6429,9 @@ forceTheme('sk-container-id-3');</script></body></div></div>
 </div></div></div>
 </div>
 <p>Now, we need to combine both numerical and categorical preprocessing and feed the
-output to a single linear model. The <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.compose.ColumnTransformer.html#sklearn.compose.ColumnTransformer" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColumnTransformer</span></code></a> class is designed for this
+output to a single linear model. The <code class="docutils literal notranslate"><span class="pre">ColumnTransformer</span></code> class is designed for this
 purpose: we provide a list of columns so that they are transformed by a specific
-transformer (or a pipeline of transformers). This <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.compose.ColumnTransformer.html#sklearn.compose.ColumnTransformer" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColumnTransformer</span></code></a> can be used as
+transformer (or a pipeline of transformers). This <code class="docutils literal notranslate"><span class="pre">ColumnTransformer</span></code> can be used as
 a preprocessing stage of a pipeline containing a linear model as the final stage.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -7173,10 +7178,10 @@ a.param-doc-link::before {
                                                                    StandardScaler()),
                                                                   (&#x27;simpleimputer&#x27;,
                                                                    SimpleImputer())]),
-                                                  &lt;sklearn.compose._column_transformer.make_column_selector object at 0x7f4de5e58550&gt;),
+                                                  &lt;sklearn.compose._column_transformer.make_column_selector object at 0x7eff62dfc550&gt;),
                                                  (&#x27;onehotencoder&#x27;,
                                                   OneHotEncoder(handle_unknown=&#x27;ignore&#x27;),
-                                                  &lt;sklearn.compose._column_transformer.make_column_selector object at 0x7f4de5e58a50&gt;)])),
+                                                  &lt;sklearn.compose._column_transformer.make_column_selector object at 0x7eff62dfca50&gt;)])),
                 (&#x27;logisticregression&#x27;, LogisticRegression())])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-10" type="checkbox" ><label for="sk-estimator-id-10" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>Pipeline</div></div><div><a class="sk-estimator-doc-link " rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.pipeline.Pipeline.html">?<span>Documentation for Pipeline</span></a><span class="sk-estimator-doc-link ">i<span>Not fitted</span></span></div></label><div class="sk-toggleable__content " data-param-prefix="">
         <div class="estimator-table">
             <details>
@@ -7417,7 +7422,7 @@ a.param-doc-link::before {
                 </table>
             </details>
         </div>
-    </div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-12" type="checkbox" ><label for="sk-estimator-id-12" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>pipeline</div></div></label><div class="sk-toggleable__content " data-param-prefix="columntransformer__pipeline__"><pre>&lt;sklearn.compose._column_transformer.make_column_selector object at 0x7f4de5e58550&gt;</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-13" type="checkbox" ><label for="sk-estimator-id-13" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>StandardScaler</div></div><div><a class="sk-estimator-doc-link " rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></div></label><div class="sk-toggleable__content " data-param-prefix="columntransformer__pipeline__standardscaler__">
+    </div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-12" type="checkbox" ><label for="sk-estimator-id-12" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>pipeline</div></div></label><div class="sk-toggleable__content " data-param-prefix="columntransformer__pipeline__"><pre>&lt;sklearn.compose._column_transformer.make_column_selector object at 0x7eff62dfc550&gt;</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-13" type="checkbox" ><label for="sk-estimator-id-13" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>StandardScaler</div></div><div><a class="sk-estimator-doc-link " rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></div></label><div class="sk-toggleable__content " data-param-prefix="columntransformer__pipeline__standardscaler__">
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
@@ -7617,7 +7622,7 @@ a.param-doc-link::before {
                 </table>
             </details>
         </div>
-    </div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-15" type="checkbox" ><label for="sk-estimator-id-15" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>onehotencoder</div></div></label><div class="sk-toggleable__content " data-param-prefix="columntransformer__onehotencoder__"><pre>&lt;sklearn.compose._column_transformer.make_column_selector object at 0x7f4de5e58a50&gt;</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-16" type="checkbox" ><label for="sk-estimator-id-16" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>OneHotEncoder</div></div><div><a class="sk-estimator-doc-link " rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.preprocessing.OneHotEncoder.html">?<span>Documentation for OneHotEncoder</span></a></div></label><div class="sk-toggleable__content " data-param-prefix="columntransformer__onehotencoder__">
+    </div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-15" type="checkbox" ><label for="sk-estimator-id-15" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>onehotencoder</div></div></label><div class="sk-toggleable__content " data-param-prefix="columntransformer__onehotencoder__"><pre>&lt;sklearn.compose._column_transformer.make_column_selector object at 0x7eff62dfca50&gt;</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-16" type="checkbox" ><label for="sk-estimator-id-16" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>OneHotEncoder</div></div><div><a class="sk-estimator-doc-link " rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.preprocessing.OneHotEncoder.html">?<span>Documentation for OneHotEncoder</span></a></div></label><div class="sk-toggleable__content " data-param-prefix="columntransformer__onehotencoder__">
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
@@ -8285,71 +8290,71 @@ forceTheme('sk-container-id-4');</script></body></div></div>
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.016235</td>
-      <td>0.005839</td>
+      <td>0.015273</td>
+      <td>0.005269</td>
       <td>1.000000</td>
       <td>0.996764</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.013732</td>
-      <td>0.005254</td>
+      <td>0.013222</td>
+      <td>0.005012</td>
       <td>1.000000</td>
       <td>1.000000</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.013984</td>
-      <td>0.005417</td>
+      <td>0.013600</td>
+      <td>0.005132</td>
       <td>1.000000</td>
       <td>1.000000</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0.013855</td>
-      <td>0.005419</td>
+      <td>0.013611</td>
+      <td>0.005182</td>
       <td>1.000000</td>
       <td>0.996764</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.014204</td>
-      <td>0.005525</td>
+      <td>0.013273</td>
+      <td>0.005010</td>
       <td>0.970588</td>
       <td>1.000000</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>0.013562</td>
-      <td>0.005290</td>
+      <td>0.012892</td>
+      <td>0.005141</td>
       <td>1.000000</td>
       <td>0.996774</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>0.014259</td>
-      <td>0.005163</td>
+      <td>0.014295</td>
+      <td>0.005028</td>
       <td>1.000000</td>
       <td>0.996774</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>0.013349</td>
-      <td>0.005101</td>
+      <td>0.013244</td>
+      <td>0.005118</td>
       <td>1.000000</td>
       <td>0.996774</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>0.014129</td>
-      <td>0.005408</td>
+      <td>0.014429</td>
+      <td>0.005971</td>
       <td>1.000000</td>
       <td>0.996774</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>0.013931</td>
-      <td>0.005600</td>
+      <td>0.013581</td>
+      <td>0.005194</td>
       <td>0.970588</td>
       <td>1.000000</td>
     </tr>
@@ -8359,15 +8364,17 @@ forceTheme('sk-container-id-4');</script></body></div></div>
 </div>
 <p>We gave basic preprocessing steps for a linear model. However, there is another group
 of models that can handle heterogeneous data: tree-based models.</p>
-<div class="tip admonition">
-<p class="admonition-title">Exercise</p>
-<p>Looking at the documentation:</p>
+</section>
+<section id="id3">
+<h3>Exercise<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>Looking at the documentation of
+<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html">HistGradientBoostingClassifier</a>:</p>
 <ul class="simple">
-<li><p>Create a <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html#sklearn.ensemble.HistGradientBoostingClassifier" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">HistGradientBoostingClassifier</span></code></a> model on the
+<li><p>Create a <code class="docutils literal notranslate"><span class="pre">HistGradientBoostingClassifier</span></code> model on the
 penguins dataset. You are free to create any preprocessing steps you want.</p></li>
 <li><p>Evaluate the model.</p></li>
 </ul>
-</div>
+</section>
 </section>
 </section>
 
@@ -8437,7 +8444,13 @@ penguins dataset. You are free to create any preprocessing steps you want.</p></
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Exercise</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

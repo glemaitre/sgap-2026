@@ -378,7 +378,7 @@
 <p>In this notebook, we will illustrate how to perform hyperparameter tuning
 using nested cross-validation.</p>
 <p>We start by defining the predictive model from the previous notebook with
-<a class="reference external" href="https://skrub-data.org/stable/reference/generated/skrub.tabular_pipeline.html#skrub.tabular_pipeline" title="(in skrub v0.11.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">tabular_pipeline()</span></code></a>.</p>
+<code class="docutils literal notranslate"><span class="pre">tabular_pipeline</span></code>.</p>
 <section id="environment-setup">
 <h2>Environment setup<a class="headerlink" href="#environment-setup" title="Link to this heading">#</a></h2>
 <p>Run this cell in JupyterLite. A local installation already provides these packages.</p>
@@ -690,7 +690,7 @@ using nested cross-validation.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2954/4149670560.py:13: Pandas4Warning: For backward compatibility, 'str' dtypes are included by select_dtypes when 'object' dtype is specified. This behavior is deprecated and will be removed in a future version. Explicitly pass 'str' to `include` to select them, or to `exclude` to remove them and silence this warning.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2977/4149670560.py:13: Pandas4Warning: For backward compatibility, 'str' dtypes are included by select_dtypes when 'object' dtype is specified. This behavior is deprecated and will be removed in a future version. Explicitly pass 'str' to `include` to select them, or to `exclude` to remove them and silence this warning.
 See https://pandas.pydata.org/docs/dev/user_guide/migration.html#string-migration-select-dtypes for details on how to write code that works with pandas 2 and 3.
   categorical_columns = X.select_dtypes(include="object").columns
 </pre></div>
@@ -2990,7 +2990,7 @@ default values and not necessarily optimal for our problem.</p>
 </div>
 </div>
 <p>We can tune these hyperparameters with
-<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV" title="(in scikit-learn v1.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">RandomizedSearchCV</span></code></a>.</p>
+<code class="docutils literal notranslate"><span class="pre">RandomizedSearchCV</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">loguniform</span>
@@ -3726,7 +3726,7 @@ a.param-doc-link::before {
                                               SquashingScaler(max_absolute_value=5)),
                                              (&#x27;logisticregression&#x27;,
                                               LogisticRegression())]),
-                   param_distributions={&#x27;logisticregression__C&#x27;: &lt;scipy.stats._distn_infrastructure.rv_continuous_frozen object at 0x7fbd737af4d0&gt;,
+                   param_distributions={&#x27;logisticregression__C&#x27;: &lt;scipy.stats._distn_infrastructure.rv_continuous_frozen object at 0x7f0071457380&gt;,
                                         &#x27;simpleimputer__strategy&#x27;: [&#x27;mean&#x27;,
                                                                     &#x27;median&#x27;,
                                                                     &#x27;most_frequent&#x27;]},
@@ -3773,7 +3773,7 @@ a.param-doc-link::before {
             param_distributions: dict or list of dicts<br><br>Dictionary with parameters names (`str`) as keys and distributions<br>or lists of parameters to try. Distributions must provide a ``rvs``<br>method for sampling (such as those from scipy.stats.distributions).<br>If a list is given, it is sampled uniformly.<br>If a list of dicts is given, first a dict is sampled uniformly, and<br>then a parameter is sampled using that dict as above.</span>
         </a>
     </td>
-            <td class="value">{&#x27;logisticregression__C&#x27;: &lt;scipy.stats....x7fbd737af4d0&gt;, &#x27;simpleimputer__strategy&#x27;: [&#x27;mean&#x27;, &#x27;median&#x27;, ...]}</td>
+            <td class="value">{&#x27;logisticregression__C&#x27;: &lt;scipy.stats....x7f0071457380&gt;, &#x27;simpleimputer__strategy&#x27;: [&#x27;mean&#x27;, &#x27;median&#x27;, ...]}</td>
         </tr>
     
 
@@ -5514,36 +5514,36 @@ forceTheme('sk-container-id-2');</script></body></div></div>
   <tbody>
     <tr>
       <th>0</th>
-      <td>3.315944</td>
-      <td>0.021383</td>
+      <td>3.136540</td>
+      <td>0.019305</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>0.913043</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>3.207595</td>
-      <td>0.020578</td>
+      <td>3.075249</td>
+      <td>0.019165</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>0.826087</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>3.212033</td>
-      <td>0.020225</td>
+      <td>3.083030</td>
+      <td>0.019649</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>0.884058</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>3.169239</td>
-      <td>0.019945</td>
+      <td>3.059342</td>
+      <td>0.019671</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>0.913043</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>3.083043</td>
-      <td>0.020221</td>
+      <td>3.005782</td>
+      <td>0.019404</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>0.750000</td>
     </tr>
@@ -5776,36 +5776,36 @@ as <code class="docutils literal notranslate"><span class="pre">neg_log_loss</sp
   <tbody>
     <tr>
       <th>0</th>
-      <td>3.082348</td>
-      <td>0.021501</td>
+      <td>3.084456</td>
+      <td>0.021361</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>-0.174938</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>3.296225</td>
-      <td>0.020748</td>
+      <td>3.164237</td>
+      <td>0.021493</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>-0.307983</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>3.097279</td>
-      <td>0.021049</td>
+      <td>3.088048</td>
+      <td>0.020971</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>-0.199069</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>3.099352</td>
-      <td>0.021547</td>
+      <td>3.082052</td>
+      <td>0.021721</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>-0.208838</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>3.092395</td>
-      <td>0.022470</td>
+      <td>3.047452</td>
+      <td>0.021979</td>
       <td>RandomizedSearchCV(cv=5,\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e...</td>
       <td>-0.398074</td>
     </tr>

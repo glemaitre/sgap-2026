@@ -40,13 +40,11 @@ logistic_regression
 
 # %% [markdown]
 #
-# ```{admonition} Exercise
-# :class: tip
+# ### Exercise
 #
-# - Evaluate the previous {py:class}`~sklearn.linear_model.LogisticRegression` model
-#   using a 3-fold cross-validation (i.e. {py:class}`sklearn.model_selection.KFold`).
+# - Evaluate the previous `LogisticRegression` model
+#   using a 3-fold cross-validation (i.e. `sklearn.model_selection.KFold`).
 # - What do you observe?
-# ```
 
 # %%
 
@@ -57,7 +55,7 @@ logistic_regression
 
 # %% [markdown]
 #
-# We can use a {py:class}`~sklearn.model_selection.StratifiedKFold` object to ensure that the class distribution is
+# We can use a `StratifiedKFold` object to ensure that the class distribution is
 # preserved in each fold. A side effect will be that all classes will be present in the
 # training set and testing set.
 
@@ -93,7 +91,7 @@ target.value_counts(normalize=True)
 # %% [markdown]
 #
 # Here, we see that the proportion of the two classes is not equal. We can check the
-# class distribution in each fold using a {py:class}`~sklearn.model_selection.KFold` object.
+# class distribution in each fold using a `KFold` object.
 
 # %%
 cv = KFold(n_splits=3, shuffle=True, random_state=0)
@@ -109,7 +107,7 @@ for cv_fold_idx, (train_indices, test_indices) in enumerate(cv.split(df, target)
 # %% [markdown]
 #
 # We observe that the class distribution is not preserved in each fold. We can use a
-# {py:class}`~sklearn.model_selection.StratifiedKFold` object to ensure that the class distribution is preserved in each
+# `StratifiedKFold` object to ensure that the class distribution is preserved in each
 # fold.
 
 # %%
@@ -125,7 +123,9 @@ for cv_fold_idx, (train_indices, test_indices) in enumerate(cv.split(df, target)
 
 # %% [markdown]
 #
-# Now, let's check the documentation of the {py:func}`~sklearn.model_selection.cross_validate` function to see if this
+# Now, let's check the documentation of
+# [cross_validate](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_validate.html)
+# to see if this
 # function already provides a way to stratify the data.
 
 # %%
@@ -153,17 +153,15 @@ logistic_regression = make_pipeline(MinMaxScaler(), LogisticRegression())
 
 # %% [markdown]
 #
-# ```{admonition} Exercise
-# :class: tip
+# ### Exercise
 #
 # Evaluate the model and compare two strategies:
 #
-# - Use a {py:class}`~sklearn.model_selection.KFold` object with 13 splits without
+# - Use a `KFold` object with 13 splits without
 #   shuffling the data.
-# - Use a {py:class}`~sklearn.model_selection.KFold` object with 13 splits with
+# - Use a `KFold` object with 13 splits with
 #   shuffling the data.
 # - What do you observe? What are the causes of the differences?
-# ```
 
 # %% [markdown]
 #
@@ -213,7 +211,7 @@ _ = plt.title("Underlying writer groups present in the target")
 # %% [markdown]
 #
 # We can use this information to properly evaluate our model. We need to use the
-# {py:class}`~sklearn.model_selection.GroupKFold` object and pass the `groups` parameter to the {py:func}`~sklearn.model_selection.cross_validate` function.
+# `GroupKFold` object and pass the `groups` parameter to the `cross_validate` function.
 
 # %%
 from sklearn.model_selection import GroupKFold
