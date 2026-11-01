@@ -12,7 +12,11 @@
         "python.terminal.useEnvFile": true,
         "security.workspace.trust.enabled": false
       },
-      "extensions": ["ms-python.python", "ms-toolsai.jupyter"]
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "ms-vscode.live-server"
+      ]
     },
     "codespaces": {
       "openFiles": ["sessions/agentic-ml/README.md"]
