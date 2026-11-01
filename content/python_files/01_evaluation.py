@@ -176,26 +176,28 @@ print(f"The mean squared error is: {error:.2f}")
 
 # %% [markdown]
 #
-# ### Exercise
+# ```{admonition} Exercise
+# :class: tip
 #
-# {py:class}`~sklearn.linear_model.LinearRegression` estimates the conditional mean. Another linear model,
-# {py:class}`~sklearn.linear_model.QuantileRegressor`, estimates a conditional quantile. The documentation is in the
-# user guide on
+# {py:class}`~sklearn.linear_model.LinearRegression` estimates the conditional mean.
+# Another linear model, {py:class}`~sklearn.linear_model.QuantileRegressor`, estimates a
+# conditional quantile. The documentation is in the user guide on
 # [quantile regression](https://scikit-learn.org/stable/modules/linear_model.html#quantile-regression)
-# and in the
-# {py:class}`~sklearn.linear_model.QuantileRegressor` docstring.
+# and in the {py:class}`~sklearn.linear_model.QuantileRegressor` docstring.
 #
 # The model minimizes the pinball loss. With `quantile=0.5`, the target is the
 # conditional median, and the loss matches the median absolute error. Set `alpha=0`:
 # the default value adds an L1 penalty and would confound the comparison with
 # {py:class}`~sklearn.linear_model.LinearRegression`.
 #
-# Fit this median model on the same data. Plot its predictions on the same figure as
-# the linear regression. Compute the mean squared error and the median absolute error
-# of both models.
+# - Fit this median model on the same data.
+# - Plot its predictions on the same figure as the linear regression.
+# - Compute the mean squared error and the median absolute error of both models.
+# - Which model wins on which metric?
 #
-# Which model wins on which metric? The model we choose depends on the quantity we
-# want to estimate, and that quantity should match the objective of the problem.
+# The model we choose depends on the quantity we want to estimate, and that quantity
+# should match the objective of the problem.
+# ```
 
 # %%
 
@@ -242,14 +244,18 @@ print(
 
 # %% [markdown]
 #
-# ### Exercise
+# ```{admonition} Exercise
+# :class: tip
 #
 # Repeat the train-test evaluation of the linear model for several seeds, and plot the
 # distribution of the test error.
 #
-# Use a `for` loop over `range`. At each seed, call {py:func}`~sklearn.model_selection.train_test_split` with
-# `random_state=seed`, fit the linear model, and append the median absolute error on
-# the test set to a list. Plot that list with {py:meth}`pandas.Series.plot.hist`.
+# - Use a `for` loop over `range`.
+# - At each seed, call {py:func}`~sklearn.model_selection.train_test_split` with
+#   `random_state=seed`, fit the linear model, and append the median absolute error on
+#   the test set to a list.
+# - Plot that list with {py:meth}`pandas.Series.plot.hist`.
+# ```
 
 # %%
 

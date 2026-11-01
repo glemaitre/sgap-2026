@@ -40,10 +40,13 @@ logistic_regression
 
 # %% [markdown]
 #
-# ### Exercise
+# ```{admonition} Exercise
+# :class: tip
 #
-# Evaluate the previous {py:class}`~sklearn.linear_model.LogisticRegression` model using a 3-fold cross-validation
-# (i.e. {py:class}`sklearn.model_selection.KFold`). What do you observe?
+# - Evaluate the previous {py:class}`~sklearn.linear_model.LogisticRegression` model
+#   using a 3-fold cross-validation (i.e. {py:class}`sklearn.model_selection.KFold`).
+# - What do you observe?
+# ```
 
 # %%
 
@@ -150,13 +153,17 @@ logistic_regression = make_pipeline(MinMaxScaler(), LogisticRegression())
 
 # %% [markdown]
 #
-# ### Exercise
+# ```{admonition} Exercise
+# :class: tip
 #
 # Evaluate the model and compare two strategies:
-# - using a {py:class}`~sklearn.model_selection.KFold` object with 13 splits without shuffling the data;
-# - using a {py:class}`~sklearn.model_selection.KFold` object with 13 splits with shuffling the data.
 #
-# What do you observe? What are the causes of the differences?
+# - Use a {py:class}`~sklearn.model_selection.KFold` object with 13 splits without
+#   shuffling the data.
+# - Use a {py:class}`~sklearn.model_selection.KFold` object with 13 splits with
+#   shuffling the data.
+# - What do you observe? What are the causes of the differences?
+# ```
 
 # %% [markdown]
 #
