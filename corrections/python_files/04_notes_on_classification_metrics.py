@@ -137,7 +137,8 @@ report.metrics.roc().plot()
 # %% [markdown]
 #
 # The precision-recall curve follows precision and recall over the same thresholds.
-# Average precision is the area under that curve.
+# Average precision summarizes that curve. At each threshold it takes the precision
+# and weights it by the gain in recall since the previous threshold.
 
 # %%
 report.metrics.precision_recall().plot()

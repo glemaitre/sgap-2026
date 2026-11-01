@@ -101,17 +101,27 @@ for estimator in cv_results["estimator"]:
 
 # %% [markdown]
 #
-# However, the previous approach is not the best way to tune hyperparameters.
-# We used the default score that is the accuracy here. However, if we have a
-# probabilistic model, we should instead optimize a proper scoring function
-# rather than a threshold-based metric. So we can optimize the log loss instead of
-# the accuracy.
+# The search above uses the default score, accuracy. For a model that predicts
+# probabilities, the log loss is a proper scoring rule, so it matches those
+# probabilities. We pass `neg_log_loss` to `RandomizedSearchCV`. Each inner split
+# then selects the hyperparameters with the smallest log loss.
 #
-# Scikit-learn scores are higher-is-better, so an error such as the log loss is passed
-# as `neg_log_loss`. The values stored in the report are negative.
+# Scikit-learn scores are higher-is-better, so the log loss is passed with a `neg_`
+# prefix. The values stored by `cross_validate` are negative: a value closer to zero
+# is a smaller log loss.
 
 # %%
-cv_results = cross_validate(tuned_model, X, y, cv=5, scoring="neg_log_loss", return_estimator=True)
+tuned_model = RandomizedSearchCV(
+    logistic_regression,
+    param_distributions=param_distributions,
+    n_iter=10,
+    cv=5,
+    scoring="neg_log_loss",
+    random_state=0,
+)
+cv_results = cross_validate(
+    tuned_model, X, y, cv=5, scoring="neg_log_loss", return_estimator=True
+)
 cv_results = pd.DataFrame(cv_results)
 cv_results
 

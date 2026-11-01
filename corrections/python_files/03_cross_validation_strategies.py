@@ -97,9 +97,9 @@ import matplotlib.pyplot as plt
 plt.plot(groups)
 plt.yticks(np.unique(groups))
 plt.xticks(writer_boundaries, rotation=90)
-plt.xlabel("Target index")
+plt.xlabel("Sample index")
 plt.ylabel("Writer index")
-_ = plt.title("Underlying writer groups present in the target")
+_ = plt.title("Writer of each sample")
 
 # %% [markdown]
 #

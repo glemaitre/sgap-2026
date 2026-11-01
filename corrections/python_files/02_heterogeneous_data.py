@@ -174,7 +174,7 @@ logistic_regression[-1].n_iter_
 
 # %% [markdown]
 #
-# The model now converges, but it required almost 2,500 iterations. The warning message
+# The model now converges, but it required 2,030 iterations. The warning message
 # mentioned that we could try to scale the data. Let's try to scale the data using a
 # `StandardScaler`. We can then check if the convergence is faster.
 
@@ -189,11 +189,14 @@ logistic_regression[-1].n_iter_
 
 # %% [markdown]
 #
-# It only requires 11 iterations now and will provide the exact same result. Scaling
-# does not change the model we want to fit. It changes the path gradient descent takes
-# to reach it. Without scaling, the steps zigzag because the features have very
-# different ranges. With scaled features, the steps point more directly toward the
-# minimum.
+# It only requires 11 iterations now. The default solver is LBFGS. The figure shows
+# the same geometry for gradient descent. Without scaling, the steps zigzag because
+# the features have very different ranges. With scaled features, the steps point more
+# directly toward the minimum.
+#
+# The default `LogisticRegression` applies an L2 penalty, with `l1_ratio=0` and
+# `C=1`. That penalty is computed on the columns the model receives, so scaling
+# changes the fitted probabilities together with the path taken by the solver.
 #
 # ![Gradient descent zigzags when the features are not scaled, and goes more directly to the minimum when they are.](../images/gradient_descent_scaling.png)
 
