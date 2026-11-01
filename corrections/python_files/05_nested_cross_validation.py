@@ -119,9 +119,7 @@ tuned_model = RandomizedSearchCV(
     scoring="neg_log_loss",
     random_state=0,
 )
-cv_results = cross_validate(
-    tuned_model, X, y, cv=5, scoring="neg_log_loss", return_estimator=True
-)
+cv_results = cross_validate(tuned_model, X, y, cv=5, scoring="neg_log_loss", return_estimator=True)
 cv_results = pd.DataFrame(cv_results)
 cv_results
 
