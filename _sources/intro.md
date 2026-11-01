@@ -4,11 +4,11 @@ This course introduces model evaluation and validation with scikit-learn, skrub,
 
 ## Notebooks
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/glemaitre/sgap-2026?quickstart=1) A ready environment with the course packages and the notebooks.
-
-[![Launch JupyterLite](/images/jupyterlite_badge.svg)](https://glemaitre.github.io/sgap-2026/jupyterlite/lab) In-browser execution, no install needed.
-
-<a href="slides-intro.pdf">Intro slides</a> Slides that introduce the course.
+| | |
+| --- | --- |
+| [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/glemaitre/sgap-2026?quickstart=1) | A ready environment with the course packages and the notebooks. |
+| [![Launch JupyterLite](/images/jupyterlite_badge.svg)](https://glemaitre.github.io/sgap-2026/jupyterlite/lab) | In-browser execution, no install needed. |
+| <a href="slides-intro.pdf">Intro slides</a> | Slides that introduce the course. |
 
 ```{tableofcontents}
 ```
