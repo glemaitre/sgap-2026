@@ -9,7 +9,7 @@ Course on model evaluation and validation with scikit-learn, skrub, and skore.
 | [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/glemaitre/sgap-2026?quickstart=1) | A ready environment with the course packages and the notebooks. |
 | [![Course website](./book/images/jupyterbook_badge.svg)](https://glemaitre.github.io/sgap-2026/) | Static HTML with precomputed results. |
 | [![Launch JupyterLite](./book/images/jupyterlite_badge.svg)](https://glemaitre.github.io/sgap-2026/jupyterlite/lab) | In-browser execution, no install needed. |
-| [Intro slides](slides-intro.pdf) | Slides that introduce the course. |
+| [![Intro slides](./book/images/pdf_badge.svg)](slides-intro.pdf) | Slides that introduce the course. |
 
 ## Run the notebooks
 
