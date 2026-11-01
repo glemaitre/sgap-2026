@@ -1,0 +1,71 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2026-11-01T20:24:13.219601Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-11-01T20:22:40.053439Z",
+      "mimetype": "image/png",
+      "name": "pipeline_fit.png",
+      "path": "images/pipeline_fit.png",
+      "size": 48380,
+      "type": "file",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2026-11-01T20:24:13.218755Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-11-01T20:22:40.052047Z",
+      "mimetype": "image/png",
+      "name": "column_transformer.png",
+      "path": "images/column_transformer.png",
+      "size": 42453,
+      "type": "file",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2026-11-01T20:24:13.218968Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-11-01T20:22:40.052439Z",
+      "mimetype": "image/png",
+      "name": "gradient_descent_scaling.png",
+      "path": "images/gradient_descent_scaling.png",
+      "size": 271232,
+      "type": "file",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2026-11-01T20:24:13.219825Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2026-11-01T20:22:40.053439Z",
+      "mimetype": "image/png",
+      "name": "pipeline_predict.png",
+      "path": "images/pipeline_predict.png",
+      "size": 38722,
+      "type": "file",
+      "writable": true
+    }
+  ],
+  "created": "2026-11-01T20:24:13.219825Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2026-11-01T20:24:13.219825Z",
+  "mimetype": null,
+  "name": "images",
+  "path": "images",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}
